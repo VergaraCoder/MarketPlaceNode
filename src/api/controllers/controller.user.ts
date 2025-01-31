@@ -1,4 +1,8 @@
 
 
 
-export class 
+export class UserController {
+    public static create(){
+            
+    }
+}
