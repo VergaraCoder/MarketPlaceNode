@@ -11,4 +11,7 @@ const StartServer = async () => {
     });
 }
 
+console.log("melo");
+
+
 export default StartServer();
