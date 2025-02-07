@@ -9,21 +9,22 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "type": "module",
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "express": "^4.21.2",
     "mysql2": "^3.12.0",
-    "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.5",
-    "sequelize-typescript": "^2.1.6",
-    "tsyringe": "^4.8.0"
+    "tsyringe": "^4.8.0",
+    "typeorm": "^0.3.20"
   },
-  "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.12.0",
     "@types/validator": "^13.12.2",
     "dotenv": "^16.4.7",
     "nodemon": "^3.1.9",
+    "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"

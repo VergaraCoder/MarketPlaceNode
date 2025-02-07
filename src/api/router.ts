@@ -1,5 +1,8 @@
-import express ,{ Router , Express} from "express";
+import { Router } from "express";
+import routerUser from './routes/routes.user.ts';
 
-const router:Express=express();
+const router:Router=Router();
 
-router.use("/api",);
+router.use("/api",routerUser);
+
+export default router;
