@@ -31,7 +31,6 @@ export const ErrorMiddleware = (
         });
     }
     else if(err.cause){
-        console.log(err instanceof ManageError);
         
         let status:any=HttpStatus[err.message];
         const message=err.cause.split(" :: ")[1];
@@ -41,10 +40,9 @@ export const ErrorMiddleware = (
             timeStamp:new Date(),
             message:message
         });
-        // res.status(err.message[0]).json({
-
-        // })
     }
+    console.log(err);
+    
      res.status(500).json({
         status: 500,
         timeStamp:new Date(),

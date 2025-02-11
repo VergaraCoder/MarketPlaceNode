@@ -1,5 +1,5 @@
 import { container } from "tsyringe";
-import { UserController } from "../controller.user";
+import { UserController } from "../user.controller";
 
 
 

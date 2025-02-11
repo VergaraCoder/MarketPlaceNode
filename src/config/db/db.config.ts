@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 // import {User} from '../../domain/models/user.model';
 import { DataSource } from 'typeorm';
 import { User } from "../../domain/models/user.model.ts";
+import {Product} from '../../domain/models/product.model.ts';
+import {Role} from '../../domain/models/roles.model.ts';
 dotenv.config();
 
 
@@ -15,7 +17,7 @@ const dbConnection:DataSource=new DataSource({
     database:process.env.DB_DATABASE,
     synchronize:true,
     logging:true,
-    entities: [User], 
+    entities: [User,Product,Role], 
 });
 // [__dirname + '/domain/models/**/*.model.ts']
 
