@@ -1,4 +1,3 @@
+import { CreateUserDto } from './createUser.dto.ts'
 
-import {CreateUserDto} from './createUser.dto.ts';
-
-export class UpdateUserDto extends CreateUserDto{}
+export class UpdateUserDto extends CreateUserDto {}

@@ -1,5 +1,4 @@
-import { container } from "tsyringe";
-    import { RolesService } from "../services/roles.service.ts";
-    
+import { container } from 'tsyringe'
+import { RolesService } from '../services/roles.service.ts'
 
-    container.registerSingleton<RolesService>(RolesService);
+container.registerSingleton<RolesService>(RolesService)

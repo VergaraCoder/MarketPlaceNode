@@ -1,3 +1,3 @@
-export interface UpdateUser{
-    affectedCount: number
+export interface UpdateUser {
+  affectedCount: number
 }

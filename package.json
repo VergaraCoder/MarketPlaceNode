@@ -4,7 +4,9 @@
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "lint": "eslint --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "author": "",
   "license": "ISC",
@@ -19,14 +21,21 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
     "@types/validator": "^13.12.2",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
     "dotenv": "^16.4.7",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
     "nodemon": "^3.1.9",
+    "prettier": "^3.5.0",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
   }
 }

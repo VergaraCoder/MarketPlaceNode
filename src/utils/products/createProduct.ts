@@ -1,6 +1,6 @@
-export interface DataProduct{
-    name:string;
-    price:number;
-    description:string;
-    stock:number;
+export interface DataProduct {
+  name: string
+  price: number
+  description: string
+  stock: number
 }

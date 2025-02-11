@@ -1,7 +1,4 @@
-import { container } from "tsyringe";
-import { UserController } from "../user.controller";
+import { container } from 'tsyringe'
+import { UserController } from '../user.controller'
 
-
-
-
-container.registerSingleton<UserController>(UserController);
+container.registerSingleton<UserController>(UserController)
