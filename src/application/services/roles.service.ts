@@ -1,12 +1,12 @@
-import { Role } from '../../domain/models/roles.model'
-import { RoleRepository } from '../../domain/repositories/roles.repository'
-import { CreateRolesDto } from '../dto/roles/createRoles.dto'
+import { Role } from '../../domain/models/roles.model.ts'
+import { RoleRepository } from '../../domain/repositories/roles.repository.ts'
+import { CreateRolesDto } from '../dto/roles/createRoles.dto.ts'
 
 export class RolesService {
   async create(data: CreateRolesDto) {
-    try {
-      const roleRepo: Role = RoleRepository.create(data)
-    } catch (err: any) {}
+    const roleRepo: Role = RoleRepository.create(data)
+    await RoleRepository.save(roleRepo)
+    return roleRepo
   }
 
   async findAll() {

@@ -10,6 +10,11 @@ export const ValidateDtoCreateUser = (
 ) => {
   const user: CreateUserDto = plainToClass(CreateUserDto, req.body)
 
+  if (typeof user.idRole !== 'number') {
+    ReponseHttp.BAD_REQUEST(res, 'THE idRole MUST BE NUMBER', req.method)
+    return
+  }
+
   if (typeof user.name !== 'string') {
     ReponseHttp.BAD_REQUEST(res, 'THE NAME MUST BE STRING', req.method)
     return
@@ -27,6 +32,11 @@ export const ValidateDtoCreateUser = (
 
   if (user.name === undefined || user.name === null) {
     ReponseHttp.BAD_REQUEST(res, 'THE NAME IS REQUIRED', req.method)
+    return
+  }
+
+  if (user.idRole === undefined || user.idRole === null) {
+    ReponseHttp.BAD_REQUEST(res, 'THE idRole IS REQUIRED', req.method)
     return
   }
 

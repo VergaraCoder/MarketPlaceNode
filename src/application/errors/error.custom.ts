@@ -20,7 +20,8 @@ export class ManageError extends Error {
   }
 
   public static signedError(message: string) {
-    const name: string = message.split(' :: ')[0]
+    const name: any = message.split(' :: ')[0]
+
     if (name) {
       throw new Error(name, { cause: message })
     } else {

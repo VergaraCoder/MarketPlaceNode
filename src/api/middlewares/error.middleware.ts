@@ -1,7 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-import { AppError } from '../../application/errors/error.handlerGlobal.ts'
-import { ReponseHttp } from '../../application/errors/enum.responseError.ts'
-import { ManageError } from '../../application/errors/error.custom.ts'
 
 enum HttpStatus {
   NOT_FOUND = 404,
@@ -13,35 +10,41 @@ enum HttpStatus {
   INTERNAL_SERVER_ERROR = 500,
 }
 
+const key: string[] = Object.keys(HttpStatus)
+
 export const ErrorMiddleware = (
   err: any,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  if (err instanceof AppError) {
-    res.status(err.statusCode).json({
-      status: err.statusCode,
-      timeStamp: new Date(),
-      method: err.method,
-      message: err.message,
-    })
-  } else if (err.cause) {
-    let status: any = HttpStatus[err.message]
-    const message = err.cause.split(' :: ')[1]
+  const ErrorComplete = err.cause ? false : true
+  console.log(ErrorComplete)
+
+  if (ErrorComplete) {
+    let status: number = parseInt(HttpStatus[err.message.split(' :: ')[0]])
+    const message: string = err.message.split(' :: ')[1]
 
     res.status(status).json({
       status: status,
       timeStamp: new Date(),
       message: message,
     })
-  }
-  console.log(err)
+  } else if (!ErrorComplete) {
+    let status: number = parseInt(HttpStatus[err.cause.split(' :: ')[0]])
+    const message: string = err.cause.split(' :: ')[1]
 
-  res.status(500).json({
-    status: 500,
-    timeStamp: new Date(),
-    method: err.method,
-    message: 'Internal Server Error',
-  })
+    res.status(status).json({
+      status: status,
+      timeStamp: new Date(),
+      message: message,
+    })
+  } else {
+    res.status(500).json({
+      status: 500,
+      timeStamp: new Date(),
+      method: err.method,
+      message: 'Internal Server Error',
+    })
+  }
 }
