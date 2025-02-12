@@ -5,6 +5,7 @@ import { DataSource } from 'typeorm'
 import { User } from '../../domain/models/user.model.ts'
 import { Product } from '../../domain/models/product.model.ts'
 import { Role } from '../../domain/models/roles.model.ts'
+import { Service } from '../../domain/models/service.model.ts'
 dotenv.config()
 
 const dbConnection: DataSource = new DataSource({
@@ -16,7 +17,7 @@ const dbConnection: DataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Role],
+  entities: [User, Product, Role, Service],
 })
 // [__dirname + '/domain/models/**/*.model.ts']
 
