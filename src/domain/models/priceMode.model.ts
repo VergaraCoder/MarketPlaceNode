@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Service } from './service.model.ts'
 
 @Entity('priceMode')
 export class PriceMode {
@@ -7,4 +8,7 @@ export class PriceMode {
 
   @Column()
   name: string
+
+  @OneToMany(()=>Service,service=>service.priceMode)
+  service:Service[];
 }

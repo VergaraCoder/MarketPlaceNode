@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  OneToMany,
+  PrimaryGeneratedColumn
 } from 'typeorm'
 import { Role } from './roles.model.ts'
+import { Schedule } from './schedule.model.ts'
 
 @Entity('users')
 export class User {
@@ -15,7 +17,7 @@ export class User {
   @Column()
   name: string
 
-  @Column()
+  @Column({unique:true})
   email: string
 
   @Column()
@@ -27,4 +29,7 @@ export class User {
   @ManyToOne(() => Role, role => role.users, { eager: true })
   @JoinColumn({ name: 'idRole' })
   role: Role
+
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
+  schedules: Schedule[]
 }

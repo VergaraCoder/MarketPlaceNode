@@ -21,6 +21,12 @@ export class UserService {
           message: 'EL ID ROLE INGRESADO NO CORRESPONSE A NINGUN ROL',
         })
       }
+      else if (err.errno==1062){
+        throw new ManageError({
+          type:"CONFLIC",
+          message:"EL EMAIL INGRESADO YA ESTA REGISTRADO"
+        });
+      }
     }
   }
 

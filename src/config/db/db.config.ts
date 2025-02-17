@@ -7,6 +7,7 @@ import { Product } from '../../domain/models/product.model.ts'
 import { Role } from '../../domain/models/roles.model.ts'
 import { Service } from '../../domain/models/service.model.ts'
 import { PriceMode } from '../../domain/models/priceMode.model.ts'
+import { Schedule } from '../../domain/models/schedule.model.ts'
 dotenv.config()
 
 const dbConnection: DataSource = new DataSource({
@@ -18,7 +19,7 @@ const dbConnection: DataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Role, Service, PriceMode],
+  entities: [User, Product, Role, Service, PriceMode, Schedule],
 })
 
 export { dbConnection }
