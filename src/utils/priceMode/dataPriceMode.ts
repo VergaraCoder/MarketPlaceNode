@@ -1,3 +1,3 @@
-export interface DataPriceMode{
-    name:string;
+export interface DataPriceMode {
+  name: string
 }

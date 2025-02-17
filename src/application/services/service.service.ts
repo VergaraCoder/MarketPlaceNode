@@ -1,7 +1,7 @@
-import { Service } from '../../domain/models/service.model'
-import { ServiceRepository } from '../../domain/repositories/service.repository'
-import { CreateServiceDto } from '../dto/service/createService.dto'
-import { ManageError } from '../errors/error.custom'
+import { Service } from '../../domain/models/service.model.ts'
+import { ServiceRepository } from '../../domain/repositories/service.repository.ts'
+import { CreateServiceDto } from '../dto/service/createService.dto.ts'
+import { ManageError } from '../errors/error.custom.ts'
 
 export class ServiceService {
   async create(dataServiceDto: CreateServiceDto) {
@@ -75,7 +75,7 @@ export class ServiceService {
       }
       return true
     } catch (err: any) {
-        throw ManageError.signedError(err.message);
+      throw ManageError.signedError(err.message)
     }
   }
 }

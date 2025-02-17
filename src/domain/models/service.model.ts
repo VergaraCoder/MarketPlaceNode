@@ -1,20 +1,19 @@
-import { Entity, PrimaryGeneratedColumn,Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
+@Entity('services')
+export class Service {
+  @PrimaryGeneratedColumn()
+  id: number
 
-@Entity("services")
-export class Service{
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  name: string
 
-    @Column()
-    name: string;
+  @Column()
+  description: string
 
-    @Column()
-    description: string;
+  @Column()
+  idPriceMode: number
 
-    @Column()
-    idPriceMode:number;
-
-    @Column()
-    idUser:number;
+  @Column()
+  idUser: number
 }
