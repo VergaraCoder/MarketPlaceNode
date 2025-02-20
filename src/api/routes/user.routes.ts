@@ -58,7 +58,11 @@ const routes: Router = Router()
  *                  userError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/users', ValidateDtoCreateUser, UserController.create)
+routes.post(
+  '/users',
+  ValidateDtoCreateUser, // validate user data
+  UserController.create, // call the controller and service
+)
 
 /**
  * @swagger
@@ -111,7 +115,7 @@ routes.get('/api/users', VerifyToken.validateToken, UserController.allUsers)
  *                 $ref: '#/components/examples/UserExample'
  *       404:
  *         description: return error 404
- *         content: 
+ *         content:
  *          application/json:
  *            examples:
  *               userErrorExample:
@@ -124,7 +128,11 @@ routes.get('/api/users', VerifyToken.validateToken, UserController.allUsers)
  *                  userError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/user/:idUser')
+routes.get(
+  '/user/:idUser',
+  VerifyToken.validateToken, // middleware validate tokens in headers
+  UserController.getOneUser, // controller to return one user
+)
 
 /**
  * @swagger
@@ -157,7 +165,12 @@ routes.get('/user/:idUser')
  *                  userError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/user/:idUser', ValidateDtoUpdateUser)
+routes.patch(
+  '/user/:idUser',
+  VerifyToken.validateToken, // Validate tokens
+  ValidateDtoUpdateUser, // Validate DTO
+  UserController.update, // controller to update user
+)
 
 /**
  * @swagger
@@ -190,8 +203,11 @@ routes.patch('/user/:idUser', ValidateDtoUpdateUser)
  *                  userDeleteError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/users/:idUser')
+routes.delete(
+  '/users/:idUser',
+  VerifyToken.validateToken, // Validate tokens
+  UserController.delete,    // controller to delete user
+)
 
-// ExampleError500
 
 export default routes

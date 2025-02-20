@@ -3,6 +3,9 @@ import { UserRepository } from '../../domain/repositories/user.repository.ts'
 import { CreateAuthDto } from '../dto/auth/createAuth.dto.ts'
 import { ManageError } from '../errors/error.custom.ts'
 import * as crypt from 'bcrypt'
+import { Result } from '../../utils/resultError/type.result.ts'
+import { CreateUserDto } from 'application/dto/user/createUser.dto.ts'
+import { DeleteResult, UpdateResult } from 'typeorm'
 
 export class UserService {
   async create(data: any): Promise<User | User[] | any> {
@@ -20,28 +23,29 @@ export class UserService {
           type: 'CONFLIC',
           message: 'EL ID ROLE INGRESADO NO CORRESPONSE A NINGUN ROL',
         })
-      }
-      else if (err.errno==1062){
+      } else if (err.errno == 1062) {
         throw new ManageError({
-          type:"CONFLIC",
-          message:"EL EMAIL INGRESADO YA ESTA REGISTRADO"
-        });
+          type: 'CONFLIC',
+          message: 'EL EMAIL INGRESADO YA ESTA REGISTRADO',
+        })
       }
     }
   }
 
-  async findAllUsers() {
-    try {
-      const allUsers: User[] = await UserRepository.find()
-      if (allUsers.length == 1) {
-        throw new ManageError({
+  async findAllUsers(): Promise<Result<User[]>> {
+    const allUsers: User[] = await UserRepository.find()
+    if (allUsers.length == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
-          message: 'THERE ARE NOT USER RECORDS',
-        })
+          message: 'THERE ARE NOT USERS RECORDS',
+        }),
       }
-      return allUsers
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+    }
+    return {
+      data: allUsers,
+      error: null,
     }
   }
 
@@ -55,5 +59,59 @@ export class UserService {
       return null
     }
     return (await crypt.compare(dataUser.password, user.password)) ? user : null
+  }
+
+  async findOneUser(id: number): Promise<Result<User>> {
+    const user: User | null = await UserRepository.findOneBy({ id: id })
+    if (!user) {
+      return {
+        data: null,
+        error: new ManageError({
+          type: 'NOT_FOUND',
+          message: 'USER NOT FOUND',
+        }),
+      }
+    }
+    return {
+      data: user,
+      error: null,
+    }
+  }
+
+  async updateUser(
+    id: number,
+    dataUser: Partial<CreateUserDto>,
+  ): Promise<Result<boolean>> {
+    const { affected }: UpdateResult = await UserRepository.update(id, dataUser)
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
+          type: 'NOT_FOUND',
+          message: 'USER NOT FOUND',
+        }),
+      }
+    }
+    return {
+      data: true,
+      error: null,
+    }
+  }
+
+  async deleteUser(id: number): Promise<Result<boolean>> {
+    const { affected }: DeleteResult = await UserRepository.delete(id)
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
+          type: 'NOT_FOUND',
+          message: 'USER NOT FOUND',
+        }),
+      }
+    }
+    return {
+      data: true,
+      error: null,
+    }
   }
 }
