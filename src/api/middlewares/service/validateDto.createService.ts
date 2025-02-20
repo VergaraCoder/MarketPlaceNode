@@ -25,6 +25,16 @@ export const ValidateDtoCreateService = (
     return
   }
 
+  if (typeof service.pricePerDuration !== 'number') {
+    ReponseHttp.BAD_REQUEST(res, 'THE PRICEPERDURATION MUST BE NUMBER', req.method)
+    return
+  }
+
+  if (typeof service.rangeOfHoursToWork !== 'string') {
+    ReponseHttp.BAD_REQUEST(res, 'THE rangeOfHoursToWork MUST BE STRING', req.method)
+    return
+  }
+
   if (typeof service.idUser !== 'number') {
     ReponseHttp.BAD_REQUEST(res, 'THE IDUSER MUST BE NUMBER', req.method)
     return
@@ -68,7 +78,7 @@ export const ValidateDtoCreateService = (
     return
   }
 
-  if (service.price < 200) {
+  if (service.pricePerDuration < 200) {
     ReponseHttp.BAD_REQUEST(res, 'THE PRICE MUST BE MORE THAN 200', req.method)
     return
   }

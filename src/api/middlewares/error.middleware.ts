@@ -43,7 +43,6 @@ export const ErrorMiddleware = (
     res.status(500).json({
       status: 500,
       timeStamp: new Date(),
-      method: err.method,
       message: 'Internal Server Error',
     })
   }

@@ -36,7 +36,7 @@ export class UserService {
       if (allUsers.length == 1) {
         throw new ManageError({
           type: 'NOT_FOUND',
-          message: 'NO HAY USUARIOS REGISTRADOS',
+          message: 'THERE ARE NOT USER RECORDS',
         })
       }
       return allUsers

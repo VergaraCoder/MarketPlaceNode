@@ -3,6 +3,6 @@ export class CreateServiceDto {
   description: string
   idPriceMode: number
   pricePerDuration:number
+  rangeOfHoursToWork:string;
   idUser: number
-  price: number
 }
