@@ -16,8 +16,6 @@ export class Schedule {
 
   @Column()
   idCustomer:number
-
-  
  
   @ManyToOne(() => User, (user) => user.schedules) 
   @JoinColumn({ name: "idCustomer" })
