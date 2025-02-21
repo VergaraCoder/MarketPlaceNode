@@ -7,9 +7,14 @@ import { UpdateResult } from 'typeorm'
 import { DeleteResult } from 'typeorm/browser'
 
 export class CartService {
-  async create() {
+  async create(dataCreateCart: CreateCartDto): Promise<Cart> {
     try {
-    } catch (err: any) {}
+      const data: Cart = CartRepository.create(dataCreateCart)
+      await CartRepository.save(data)
+      return data
+    } catch (err: any) {
+      throw err
+    }
   }
 
   async findAll(): Promise<Result<Cart[]>> {
@@ -29,8 +34,8 @@ export class CartService {
     }
   }
 
-  async findOne(idCart:number): Promise<Result<Cart>> {
-    const cart: Cart | null = await CartRepository.findOneBy({id:idCart})
+  async findOne(idCart: number): Promise<Result<Cart>> {
+    const cart: Cart | null = await CartRepository.findOneBy({ id: idCart })
     if (!cart) {
       return {
         data: null,
@@ -46,9 +51,23 @@ export class CartService {
     }
   }
 
-  async update(id:number,dataUpdate:Partial<CreateCartDto>) :Promise<Result<boolean>>{
-    const {affected}: UpdateResult = await CartRepository.update(id,dataUpdate)
-    if (affected==0) {
+  async findOneByIdUser(idUser: number): Promise<Cart> {
+    const cart: Cart | null = await CartRepository.findOneBy({ idUser })
+    if (!cart) {
+      return await this.create({idUser})
+    }
+    return cart
+  }
+
+  async update(
+    id: number,
+    dataUpdate: Partial<CreateCartDto>,
+  ): Promise<Result<boolean>> {
+    const { affected }: UpdateResult = await CartRepository.update(
+      id,
+      dataUpdate,
+    )
+    if (affected == 0) {
       return {
         data: null,
         error: new ManageError({
@@ -63,9 +82,9 @@ export class CartService {
     }
   }
 
-  async delete(id:number):Promise<Result<boolean>> {
-    const {affected}: DeleteResult = await CartRepository.delete(id)
-    if (affected==0) {
+  async delete(id: number): Promise<Result<boolean>> {
+    const { affected }: DeleteResult = await CartRepository.delete(id)
+    if (affected == 0) {
       return {
         data: null,
         error: new ManageError({
