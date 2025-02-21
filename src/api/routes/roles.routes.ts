@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { RolesController } from '../controllers/roles.controller.ts'
+import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
 
 const routes: Router = Router()
 
@@ -49,7 +50,7 @@ const routes: Router = Router()
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/roles', RolesController.createRoles)
+routes.post('/roles',VerifyToken.validateToken ,RolesController.createRoles)
 
 
 /**
@@ -83,7 +84,7 @@ routes.post('/roles', RolesController.createRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/roles', RolesController.findAllRoles)
+routes.get('/roles', VerifyToken.validateToken,RolesController.findAllRoles)
 
 /**
  * @swagger
@@ -116,7 +117,7 @@ routes.get('/roles', RolesController.findAllRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/roles/:idRole', RolesController.findOneRoles)
+routes.get('/roles/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
 
 
 /**
@@ -150,7 +151,7 @@ routes.get('/roles/:idRole', RolesController.findOneRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/roles/:idRole', RolesController.updateRoles)
+routes.patch('/roles/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
 
 
 /**
@@ -184,6 +185,6 @@ routes.patch('/roles/:idRole', RolesController.updateRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/roles/:idRole', RolesController.deleteRoles)
+routes.delete('/roles/:idRole', VerifyToken.validateToken,RolesController.deleteRoles)
 
 export default routes
