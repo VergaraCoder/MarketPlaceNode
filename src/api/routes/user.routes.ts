@@ -206,8 +206,7 @@ routes.patch(
 routes.delete(
   '/users/:idUser',
   VerifyToken.validateToken, // Validate tokens
-  UserController.delete,    // controller to delete user
+  UserController.delete, // controller to delete user
 )
-
 
 export default routes
