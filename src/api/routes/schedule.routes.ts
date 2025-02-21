@@ -1,5 +1,8 @@
 import { Router } from 'express'
 import { ScheduleController } from '../controllers/schedule.controller.ts'
+import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
+import { ValidateDtoCreateSchedule } from '../middlewares/schedule/validateDto.createSchedule.ts'
+import { ValidateDtoUpdateSchedule } from '../middlewares/schedule/validateDto.updateSchedule.ts'
 
 const routes: Router = Router()
 
@@ -9,7 +12,6 @@ const routes: Router = Router()
  *      name: Schedules
  *      description: The schedules endpoints
  */
-
 
 /**
  * @swagger
@@ -23,8 +25,8 @@ const routes: Router = Router()
  *       required:  true
  *       content:
  *         application/json:
- *           schema: 
- *             $ref: '#/components/schemas/Schedule'  
+ *           schema:
+ *             $ref: '#/components/schemas/Schedule'
  *     responses:
  *       200:
  *         description: return schedules that was created
@@ -48,15 +50,19 @@ const routes: Router = Router()
  *                  scheduleError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/schedule', ScheduleController.createSchedule)
-
+routes.post(
+  '/schedule',
+  VerifyToken.validateToken,
+  ValidateDtoCreateSchedule,
+  ScheduleController.createSchedule,
+)
 
 /**
  * @swagger
  * /api/schedule:
  *   get:
  *     summary: This endpoint is for get all schedules
- *     description:  Returns the schedules 
+ *     description:  Returns the schedules
  *     tags:
  *       - Schedules
  *     responses:
@@ -82,8 +88,11 @@ routes.post('/schedule', ScheduleController.createSchedule)
  *                  scheduleError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/schedule', ScheduleController.findAllSchedule)
-
+routes.get(
+  '/schedule',
+  VerifyToken.validateToken,
+  ScheduleController.findAllSchedule,
+)
 
 /**
  * @swagger
@@ -116,15 +125,18 @@ routes.get('/schedule', ScheduleController.findAllSchedule)
  *                  scheduleError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/schedule/:idSchedule', ScheduleController.findOneSchedule)
-
+routes.get(
+  '/schedule/:idSchedule',
+  VerifyToken.validateToken,
+  ScheduleController.findOneSchedule,
+)
 
 /**
  * @swagger
  * /api/schedule/:idSchedule:
  *   patch:
  *     summary: This endpoint is for update one schedule based in idSchedule
- *     description:  Returns the boolean 
+ *     description:  Returns the boolean
  *     tags:
  *       - Schedules
  *     responses:
@@ -133,7 +145,7 @@ routes.get('/schedule/:idSchedule', ScheduleController.findOneSchedule)
  *         content:
  *           application/json:
  *             examples:
- *               oneSchedule: 
+ *               oneSchedule:
  *                 $ref: '#/components/examples/ExamplePatch'
  *       404:
  *         description: return error
@@ -150,8 +162,12 @@ routes.get('/schedule/:idSchedule', ScheduleController.findOneSchedule)
  *                  scheduleError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/schedule/:idSchedule', ScheduleController.updateSchedule)
-
+routes.patch(
+  '/schedule/:idSchedule',
+  VerifyToken.validateToken,
+  ValidateDtoUpdateSchedule,
+  ScheduleController.updateSchedule,
+)
 
 /**
  * @swagger
@@ -163,11 +179,11 @@ routes.patch('/schedule/:idSchedule', ScheduleController.updateSchedule)
  *       - Schedules
  *     responses:
  *       200:
- *         description: return boolean true 
+ *         description: return boolean true
  *         content:
  *           application/json:
  *             examples:
- *               oneSchedule: 
+ *               oneSchedule:
  *                 $ref: '#/components/examples/ExampleDelete'
  *       404:
  *         description: return error
@@ -184,6 +200,10 @@ routes.patch('/schedule/:idSchedule', ScheduleController.updateSchedule)
  *                  scheduleError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/schedule/:idSchedule', ScheduleController.deleteSchedule)
+routes.delete(
+  '/schedule/:idSchedule',
+  VerifyToken.validateToken,
+  ScheduleController.deleteSchedule,
+)
 
 export default routes

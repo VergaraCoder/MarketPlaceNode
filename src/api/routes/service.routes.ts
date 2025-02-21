@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { ServiceController } from '../controllers/service.controller.ts'
 import { ValidateDtoCreateService } from '../middlewares/service/validateDto.createService.ts'
+import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
+import { ValidateDtoUpdateUser } from 'api/middlewares/users/validateDto.updateUser.ts'
 
 const routes: Router = Router()
 
@@ -50,10 +52,10 @@ const routes: Router = Router()
  */
 routes.post(
   '/service',
+  VerifyToken.validateToken,
   ValidateDtoCreateService,
   ServiceController.createService,
 )
-
 
 /**
  * @swagger
@@ -86,7 +88,12 @@ routes.post(
  *                  serviceError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/service', ServiceController.findAllService)
+routes.get(
+  '/service',
+  VerifyToken.validateToken,
+  ValidateDtoUpdateUser,
+  ServiceController.findAllService,
+)
 
 /**
  * @swagger
@@ -119,7 +126,11 @@ routes.get('/service', ServiceController.findAllService)
  *                  serviceError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/service/:idService', ServiceController.findOneService)
+routes.get(
+  '/service/:idService',
+  VerifyToken.validateToken,
+  ServiceController.findOneService,
+)
 
 /**
  * @swagger
@@ -152,7 +163,11 @@ routes.get('/service/:idService', ServiceController.findOneService)
  *                  serviceError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/service/:idService', ServiceController.updateService)
+routes.patch(
+  '/service/:idService',
+  VerifyToken.validateToken,
+  ServiceController.updateService,
+)
 
 /**
  * @swagger
@@ -185,6 +200,10 @@ routes.patch('/service/:idService', ServiceController.updateService)
  *                  serviceError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/service/:idService', ServiceController.deleteService)
+routes.delete(
+  '/service/:idService',
+  VerifyToken.validateToken,
+  ServiceController.deleteService,
+)
 
 export default routes
