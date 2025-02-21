@@ -7,6 +7,7 @@ import { affectedCount } from '../../utils/user/types/update.user.ts'
 import { Result } from 'utils/resultError/type.result.ts'
 import { error } from 'console'
 import { DeleteResult, UpdateResult } from 'typeorm'
+import { CreateProductDto } from 'application/dto/products/createProduct.dto.ts'
 
 export class ProductService {
   async createProduct(dataProduct: DataProduct) {
@@ -15,6 +16,9 @@ export class ProductService {
       await ProductRepository.save(dataProductCreate)
       return dataProductCreate
     } catch (err: any) {
+      console.log("THE ERROR IS ");
+      console.log(err);
+      
       throw err
     }
   }
@@ -58,7 +62,7 @@ export class ProductService {
 
   async updateProduct(
     idProduct: number,
-    dataProduct: DataUpdateProduct,
+    dataProduct: Partial<CreateProductDto>,
   ): Promise<Result<boolean>> {
     const { affected }: UpdateResult = await ProductRepository.update(
       idProduct,

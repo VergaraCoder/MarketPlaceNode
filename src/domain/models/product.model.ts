@@ -1,6 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Check, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {ProductsCart} from './productsCart.model.ts';
+
 
 @Entity('products')
+@Check('stock > 0')
 export class Product {
   @PrimaryGeneratedColumn()
   id: number
@@ -14,6 +17,9 @@ export class Product {
   @Column()
   description: string
 
-  @Column()
+  @Column({})
   stock: number
+
+  @OneToMany(()=>ProductsCart,productCart=>productCart.product)
+  productCart:ProductsCart[];
 }
