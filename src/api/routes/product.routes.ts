@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { ControllerProduct } from '../controllers/product.controller.ts'
 import { ValidateDtoCreateProducts } from '../middlewares/products/validateDto.createProducts.ts'
 import { ValidateDtoUpdateProducts } from '../middlewares/products/validateDto.updateProduct.ts'
+import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
 const routes: Router = Router()
 
 /**
@@ -39,7 +40,7 @@ const routes: Router = Router()
  *           application/json:
  *             examples:
  *               errorBadRequest:
- *                 $ref: '#/components/examples/ProductExample400'  
+ *                 $ref: '#/components/examples/ProductExample400'
  *       500:
  *         description: return error 500
  *         content:
@@ -48,7 +49,12 @@ const routes: Router = Router()
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/products', ValidateDtoCreateProducts, ControllerProduct.create)
+routes.post(
+  '/products',
+  VerifyToken.validateToken,
+  ValidateDtoCreateProducts,
+  ControllerProduct.create,
+)
 
 /**
  * @swagger
@@ -81,7 +87,7 @@ routes.post('/products', ValidateDtoCreateProducts, ControllerProduct.create)
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/products', ControllerProduct.findAll)
+routes.get('/products', VerifyToken.validateToken, ControllerProduct.findAll)
 
 /**
  * @swagger
@@ -114,7 +120,11 @@ routes.get('/products', ControllerProduct.findAll)
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/products/:idProduct', ControllerProduct.findOneProduct)
+routes.get(
+  '/products/:idProduct',
+  VerifyToken.validateToken,
+  ControllerProduct.findOneProduct,
+)
 
 /**
  * @swagger
@@ -149,6 +159,7 @@ routes.get('/products/:idProduct', ControllerProduct.findOneProduct)
  */
 routes.patch(
   '/products/:idProduct',
+  VerifyToken.validateToken,
   ValidateDtoUpdateProducts,
   ControllerProduct.updateProduct,
 )
@@ -184,6 +195,10 @@ routes.patch(
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/products/:idProduct', ControllerProduct.deleteProduct)
+routes.delete(
+  '/products/:idProduct',
+  VerifyToken.validateToken,
+  ControllerProduct.deleteProduct,
+)
 
 export default routes

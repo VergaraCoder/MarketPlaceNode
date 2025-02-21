@@ -4,6 +4,9 @@ import { DataProduct } from '../../utils/products/createProduct.ts'
 import { DataUpdateProduct } from '../../utils/products/updateProduct.ts'
 import { ManageError } from '../errors/error.custom.ts'
 import { affectedCount } from '../../utils/user/types/update.user.ts'
+import { Result } from 'utils/resultError/type.result.ts'
+import { error } from 'console'
+import { DeleteResult, UpdateResult } from 'typeorm'
 
 export class ProductService {
   async createProduct(dataProduct: DataProduct) {
@@ -16,68 +19,80 @@ export class ProductService {
     }
   }
 
-  async getAllProducts(): Promise<Product[]> {
-    try {
-      const products: Product[] = await ProductRepository.find()
-      if (products.length == 0) {
-        throw new ManageError({
+  async getAllProducts(): Promise<Result<Product[]>> {
+    const products: Product[] = await ProductRepository.find()
+    if (products.length == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'THERE ARE NOT PRODUCTS',
-        })
+        }),
       }
-      return products
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+    }
+
+    return {
+      data: products,
+      error: null,
     }
   }
 
-  async getOneProductById(idProduct: number) {
-    try {
-      const product: Product | null = await ProductRepository.findOneBy({
-        id: idProduct,
-      })
-      if (!product) {
-        throw new ManageError({
+  async getOneProductById(idProduct: number): Promise<Result<Product>> {
+    const product: Product | null = await ProductRepository.findOneBy({
+      id: idProduct,
+    })
+    if (!product) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'THIS PRODUCT DOES NOT EXIST',
-        })
+        }),
       }
-      return product
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+    }
+    return {
+      data: product,
+      error: null,
     }
   }
 
-  async updateProduct(idProduct: number, dataProduct: DataUpdateProduct) {
-    try {
-      const { affected } = await ProductRepository.update(
-        idProduct,
-        dataProduct,
-      )
-      if (affected == 0) {
-        throw new ManageError({
+  async updateProduct(
+    idProduct: number,
+    dataProduct: DataUpdateProduct,
+  ): Promise<Result<boolean>> {
+    const { affected }: UpdateResult = await ProductRepository.update(
+      idProduct,
+      dataProduct,
+    )
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'THIS PRODUCT DOES NOT EXIST',
-        })
+        }),
       }
-      return true
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+    }
+    return {
+      data: true,
+      error: null,
     }
   }
 
-  async deleteProduct(idProduct: number) {
-    try {
-      const { affected } = await ProductRepository.delete(idProduct)
-      if (affected == 0) {
-        throw new ManageError({
+  async deleteProduct(idProduct: number):Promise<Result<boolean>> {
+    const { affected }: DeleteResult = await ProductRepository.delete(idProduct)
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'THIS PRODUCT DOES NOT EXIST',
-        })
+        }),
       }
-      return true
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+    }
+    return {
+      data: true,
+      error: null,
     }
   }
 }
