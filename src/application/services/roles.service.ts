@@ -2,7 +2,7 @@ import { Result } from 'utils/resultError/type.result.ts'
 import { Role } from '../../domain/models/roles.model.ts'
 import { RoleRepository } from '../../domain/repositories/roles.repository.ts'
 import { CreateRolesDto } from '../dto/roles/createRoles.dto.ts'
-import { ManageError } from 'application/errors/error.custom.ts'
+import { ManageError } from '../errors/error.custom.ts'
 import { DeleteResult, UpdateResult } from 'typeorm'
 
 export class RolesService {

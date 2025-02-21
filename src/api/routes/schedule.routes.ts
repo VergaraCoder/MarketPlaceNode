@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { ScheduleController } from '../controllers/schedule.controller.ts'
-import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
 import { ValidateDtoCreateSchedule } from '../middlewares/schedule/validateDto.createSchedule.ts'
 import { ValidateDtoUpdateSchedule } from '../middlewares/schedule/validateDto.updateSchedule.ts'
 

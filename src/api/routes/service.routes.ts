@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { ServiceController } from '../controllers/service.controller.ts'
 import { ValidateDtoCreateService } from '../middlewares/service/validateDto.createService.ts'
-import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
-import { ValidateDtoUpdateUser } from 'api/middlewares/users/validateDto.updateUser.ts'
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
+import { ValidateDtoUpdateUser } from '..//middlewares/users/validateDto.updateUser.ts'
 
 const routes: Router = Router()
 

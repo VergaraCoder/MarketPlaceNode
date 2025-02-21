@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { ControllerProduct } from '../controllers/product.controller.ts'
 import { ValidateDtoCreateProducts } from '../middlewares/products/validateDto.createProducts.ts'
 import { ValidateDtoUpdateProducts } from '../middlewares/products/validateDto.updateProduct.ts'
-import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
 const routes: Router = Router()
 
 /**

@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { Role } from './roles.model.ts'
 import { Schedule } from './schedule.model.ts'
+import {Cart} from './cart.model.ts';
 
 @Entity('users')
 export class User {
@@ -32,4 +33,7 @@ export class User {
 
   @OneToMany(() => Schedule, (schedule) => schedule.user)
   schedules: Schedule[]
+
+  @OneToMany(() => Cart, (cart) => cart.user)
+  cart: Cart[]
 }

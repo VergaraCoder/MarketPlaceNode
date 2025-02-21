@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { RolesController } from '../controllers/roles.controller.ts'
-import { VerifyToken } from 'api/middlewares/auth/validateTokens.ts'
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
 
 const routes: Router = Router()
 
