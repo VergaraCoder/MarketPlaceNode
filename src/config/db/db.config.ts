@@ -10,6 +10,7 @@ import { PriceMode } from '../../domain/models/priceMode.model.ts'
 import { Schedule } from '../../domain/models/schedule.model.ts'
 import { Cart } from '../../domain/models/cart.model.ts'
 import { ProductsCart } from '../../domain/models/productsCart.model.ts'
+import { Orders } from '../../domain/models/orders.model.ts'
 dotenv.config()
 
 const dbConnection: DataSource = new DataSource({
@@ -21,7 +22,7 @@ const dbConnection: DataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Role, Service, PriceMode, Schedule,Cart,ProductsCart],
+  entities: [User, Product, Role, Service, PriceMode, Schedule,Cart,ProductsCart,Orders],
 })
 
 export { dbConnection }

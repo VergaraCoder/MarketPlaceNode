@@ -50,8 +50,8 @@ const routes: Router = Router()
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.post(
-  '/products',
-  VerifyToken.validateToken,
+  '/',
+  // VerifyToken.validateToken,
   ValidateDtoCreateProducts,
   ControllerProduct.create,
 )

@@ -6,7 +6,7 @@ import { VerifyUser } from '../middlewares/auth/validateUser/validateUser.ts'
 const routes: Router = Router()
 
 routes.post(
-  '/auth/login',
+  '/login',
   ValidateDtoAuth,
   VerifyUser.validate,
   AuthController.createAuth,

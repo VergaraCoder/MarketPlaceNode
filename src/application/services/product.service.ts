@@ -60,6 +60,25 @@ export class ProductService {
     }
   }
 
+
+  async OneProductById(idProduct: number): Promise<Product> {
+    try{
+      const product: Product | null = await ProductRepository.findOneBy({
+        id: idProduct,
+      })
+      if (!product) {
+        throw new ManageError({
+          type:"NOT_FOUND",
+          message:"PRODUCT NOT FOUND"
+        });
+      }
+      return product;
+    }catch(err:any){
+      throw ManageError.signedError(err.message);
+    }
+  }
+
+
   async updateProduct(
     idProduct: number,
     dataProduct: Partial<CreateProductDto>,

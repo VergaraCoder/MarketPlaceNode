@@ -51,7 +51,7 @@ const routes: Router = Router()
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.post(
-  '/schedule',
+  '/',
   VerifyToken.validateToken,
   ValidateDtoCreateSchedule,
   ScheduleController.createSchedule,
@@ -89,7 +89,7 @@ routes.post(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/schedule',
+  '/',
   VerifyToken.validateToken,
   ScheduleController.findAllSchedule,
 )
@@ -126,7 +126,7 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/schedule/:idSchedule',
+  '/:idSchedule',
   VerifyToken.validateToken,
   ScheduleController.findOneSchedule,
 )
@@ -163,7 +163,7 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.patch(
-  '/schedule/:idSchedule',
+  '/:idSchedule',
   VerifyToken.validateToken,
   ValidateDtoUpdateSchedule,
   ScheduleController.updateSchedule,
@@ -201,7 +201,7 @@ routes.patch(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.delete(
-  '/schedule/:idSchedule',
+  '/:idSchedule',
   VerifyToken.validateToken,
   ScheduleController.deleteSchedule,
 )

@@ -17,7 +17,8 @@ const StartServer = async () => {
     })
     server.use(express.json())
     server.use(express.urlencoded({ extended: false }))
-    server.use(router)
+
+    server.use('/api',router)
 
     server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpect));
 

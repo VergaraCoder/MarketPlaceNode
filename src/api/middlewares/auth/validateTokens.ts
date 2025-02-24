@@ -2,11 +2,12 @@ import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { ReponseHttp } from '../../../application/errors/enum.responseError.ts'
+import { AuthData } from 'utils/auth/payloadToke.ts'
 dotenv.config()
 
 export class VerifyToken {
   public static async validateToken(
-    req: Request,
+    req: any ,
     res: Response,
     next: NextFunction,
   ) {
@@ -17,7 +18,10 @@ export class VerifyToken {
         ReponseHttp.UNAUTHORIZED(res, 'THE TOKEN MUST BE PROVIDER', 'UNKNOW')
         return
       }
+      console.log("PASS");
+      
       const decoded = jwt.verify(token, secret)
+      req.user=decoded;
       next()
     } catch (err: any) {
       if (err.message == 'jwt expired') {

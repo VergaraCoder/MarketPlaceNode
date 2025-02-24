@@ -50,7 +50,7 @@ const routes: Router = Router()
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/roles',VerifyToken.validateToken ,RolesController.createRoles)
+routes.post('/',VerifyToken.validateToken ,RolesController.createRoles)
 
 
 /**
@@ -84,7 +84,7 @@ routes.post('/roles',VerifyToken.validateToken ,RolesController.createRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/roles', VerifyToken.validateToken,RolesController.findAllRoles)
+routes.get('/', VerifyToken.validateToken,RolesController.findAllRoles)
 
 /**
  * @swagger
@@ -117,7 +117,7 @@ routes.get('/roles', VerifyToken.validateToken,RolesController.findAllRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/roles/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
+routes.get('/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
 
 
 /**
@@ -151,7 +151,7 @@ routes.get('/roles/:idRole',VerifyToken.validateToken ,RolesController.findOneRo
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/roles/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
+routes.patch('/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
 
 
 /**
@@ -185,6 +185,6 @@ routes.patch('/roles/:idRole',VerifyToken.validateToken ,RolesController.updateR
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/roles/:idRole', VerifyToken.validateToken,RolesController.deleteRoles)
+routes.delete('/:idRole', VerifyToken.validateToken,RolesController.deleteRoles)
 
 export default routes

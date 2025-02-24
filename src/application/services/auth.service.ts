@@ -11,7 +11,7 @@ export class AuthService {
   create(dataUser: CreateAuthDto): ReturnTokens {
     const secret: string | any = process.env.JWT_SECRET
     return {
-      access_token: JWT.sign(dataUser, secret, { expiresIn: '30m' }),
+      access_token: JWT.sign(dataUser, secret, { expiresIn: '1d' }),
       refresh_token: JWT.sign(dataUser, secret, { expiresIn: '5d' }),
     }
   }

@@ -51,7 +51,7 @@ const routes: Router = Router()
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.post(
-  '/service',
+  '/',
   VerifyToken.validateToken,
   ValidateDtoCreateService,
   ServiceController.createService,
@@ -89,7 +89,7 @@ routes.post(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/service',
+  '/',
   VerifyToken.validateToken,
   ValidateDtoUpdateUser,
   ServiceController.findAllService,
@@ -127,7 +127,7 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/service/:idService',
+  '/:idService',
   VerifyToken.validateToken,
   ServiceController.findOneService,
 )
@@ -164,7 +164,7 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.patch(
-  '/service/:idService',
+  '/:idService',
   VerifyToken.validateToken,
   ServiceController.updateService,
 )
@@ -201,7 +201,7 @@ routes.patch(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.delete(
-  '/service/:idService',
+  '/:idService',
   VerifyToken.validateToken,
   ServiceController.deleteService,
 )
