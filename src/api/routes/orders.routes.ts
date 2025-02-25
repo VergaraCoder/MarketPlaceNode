@@ -17,17 +17,17 @@ routes.get(
   OrdersController.findAllOrders)
 
 routes.get(
-  '/orders/:idOrders',
+  '/:idOrder',
   VerifyToken.validateToken,
   OrdersController.findOneOrders,
 )
 routes.patch(
-  '/orders/:idOrders',
+  '/:idOrder',
   ValidateDtoUpdateOrders,
   OrdersController.updateOrders,
 )
 routes.delete(
-  '/orders/:idOrders',
+  '/:idOrder',
   VerifyToken.validateToken,
   OrdersController.deleteOrders,
 )

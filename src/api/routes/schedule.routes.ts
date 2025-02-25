@@ -1,10 +1,10 @@
-import { Router } from 'express'
-import { ScheduleController } from '../controllers/schedule.controller.ts'
-import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
-import { ValidateDtoCreateSchedule } from '../middlewares/schedule/validateDto.createSchedule.ts'
-import { ValidateDtoUpdateSchedule } from '../middlewares/schedule/validateDto.updateSchedule.ts'
+import { Router } from 'express';
+import { ScheduleController } from '../controllers/schedule.controller.ts';
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts';
+import { ValidateDtoCreateSchedule } from '../middlewares/schedule/validateDto.createSchedule.ts';
+import { ValidateDtoUpdateSchedule } from '../middlewares/schedule/validateDto.updateSchedule.ts';
 
-const routes: Router = Router()
+const routes: Router = Router();
 
 /**
  * @swagger
@@ -51,11 +51,11 @@ const routes: Router = Router()
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.post(
-  '/',
+  '/:idService/schedule',
   VerifyToken.validateToken,
   ValidateDtoCreateSchedule,
   ScheduleController.createSchedule,
-)
+);
 
 /**
  * @swagger
@@ -89,10 +89,10 @@ routes.post(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/',
+  '/:idService/schedule',
   VerifyToken.validateToken,
   ScheduleController.findAllSchedule,
-)
+);
 
 /**
  * @swagger
@@ -126,10 +126,10 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.get(
-  '/:idSchedule',
+  '/:idService/schedule/:idSchedule',
   VerifyToken.validateToken,
   ScheduleController.findOneSchedule,
-)
+);
 
 /**
  * @swagger
@@ -163,11 +163,11 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.patch(
-  '/:idSchedule',
+  '/:idService/schedule/:idSchedule',
   VerifyToken.validateToken,
   ValidateDtoUpdateSchedule,
   ScheduleController.updateSchedule,
-)
+);
 
 /**
  * @swagger
@@ -201,9 +201,9 @@ routes.patch(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.delete(
-  '/:idSchedule',
+  '/:idService/schedule/:idSchedule',
   VerifyToken.validateToken,
   ScheduleController.deleteSchedule,
-)
+);
 
-export default routes
+export default routes;

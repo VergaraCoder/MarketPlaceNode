@@ -51,7 +51,7 @@ const routes: Router = Router()
  */
 routes.post(
   '/',
-  // VerifyToken.validateToken,
+  VerifyToken.validateToken,
   ValidateDtoCreateProducts,
   ControllerProduct.create,
 )

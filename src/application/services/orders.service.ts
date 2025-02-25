@@ -13,12 +13,20 @@ export class OrdersService {
   async create(dataOrder: CreateOrdersDto) {
     const serviceProductCart: ProductsCartService =
       container.resolve(ProductsCartService);
+    const date: Date = new Date();
+    const dateSent: Date = new Date(dataOrder.date);
     try {
+      if (dateSent.getTime() < date.getTime()) {
+        throw new ManageError({
+          type: 'CONFLIC',
+          message: 'THE DATE SENT MUST BE GREATER THAN THE CURRENT DATE',
+        });
+      }
       let totalPrice: number;
       const productCart: ProductsCart =
         await serviceProductCart.returnProductCartToOrder(
           dataOrder.idProductCart,
-        );        
+        );
       totalPrice = productCart.quantity * productCart.product.price;
       const dataOrderCreate: Orders = OrderRepository.create({
         ...dataOrder,
@@ -27,8 +35,7 @@ export class OrdersService {
       await OrderRepository.save(dataOrderCreate);
       return dataOrderCreate;
     } catch (err: any) {
-          console.log(err);
-      throw err;
+      throw ManageError.signedError(err.message);
     }
   }
 

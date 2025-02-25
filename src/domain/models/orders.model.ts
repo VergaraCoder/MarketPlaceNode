@@ -7,7 +7,7 @@ export class Orders{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique:true})
     idProductCart: number;
 
     @Column()

@@ -12,13 +12,12 @@ import routerOrder from './routes/orders.routes.ts';
 const router: Router = Router()
 
 router.use('/users', routerUser)
-router.use('/cart', routerCart)
-router.use('/cart-items', routerProducCart)
-router.use('/items', routerProduct)
+router.use('/carts', routerCart)
+router.use('/carts', routerProducCart)
+router.use('/products', routerProduct)
 router.use('/roles', routerRoles)
 router.use('/auth', routerAuth)
 router.use('/services', routerService)
-router.use('/schedule', routerSchedule)
 router.use('/orders', routerOrder)
 
 export default router

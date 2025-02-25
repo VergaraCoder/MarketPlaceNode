@@ -4,10 +4,11 @@ import {VerifyToken} from '../middlewares/auth/validateTokens.ts';
 
 const routes: Router = Router()
 
-routes.post('/cart', CartController.createCart)
-routes.get('/cart', VerifyToken.validateToken, CartController.findAllCart)
-routes.get('/cart/:idCart', CartController.findOneCart)
-routes.patch('/cart/:idCart', CartController.updateCart)
-routes.delete('/cart/:idCart', CartController.deleteCart)
+// ROUTES "cart"
+
+routes.post('/', CartController.createCart)
+routes.get('/:cartId', VerifyToken.validateToken, CartController.findAllCart)
+routes.patch('/:idCart', CartController.updateCart)
+routes.delete('/:idCart', CartController.deleteCart)
 
 export default routes
