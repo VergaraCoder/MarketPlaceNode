@@ -35,6 +35,12 @@ export class OrdersService {
       await OrderRepository.save(dataOrderCreate);
       return dataOrderCreate;
     } catch (err: any) {
+      if (err.errno == 1062) {
+        throw new ManageError({
+          type: 'CONFLIC',
+          message: 'THIS PRODUCARTID ALREADY RECORDS',
+        });
+      }
       throw ManageError.signedError(err.message);
     }
   }
