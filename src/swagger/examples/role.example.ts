@@ -48,4 +48,4 @@ export default {
       message: 'ROLE NOT FOUND',
     },
   },
-}
+};

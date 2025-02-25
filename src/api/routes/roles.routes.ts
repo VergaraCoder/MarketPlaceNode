@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import { RolesController } from '../controllers/roles.controller.ts'
-import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
+import { Router } from 'express';
+import { RolesController } from '../controllers/roles.controller.ts';
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts';
 
-const routes: Router = Router()
+const routes: Router = Router();
 
 /**
  * @swagger
@@ -10,7 +10,6 @@ const routes: Router = Router()
  *      name: Roles
  *      description: The roles endpoints
  */
-
 
 /**
  * @swagger
@@ -26,7 +25,7 @@ const routes: Router = Router()
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Role'
- *        
+ *
  *     responses:
  *       200:
  *         description: return roles that was created
@@ -41,7 +40,7 @@ const routes: Router = Router()
  *            application/json:
  *              examples:
  *                  scheduleCreateError:
- *                      $ref: '#/components/examples/RoleExample400'    
+ *                      $ref: '#/components/examples/RoleExample400'
  *       500:
  *         description: return error 500
  *         content:
@@ -50,15 +49,14 @@ const routes: Router = Router()
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/',VerifyToken.validateToken ,RolesController.createRoles)
-
+routes.post('/', VerifyToken.validateToken, RolesController.createRoles);
 
 /**
  * @swagger
  * /api/roles:
  *   get:
  *     summary: This endpoint is for get one product based in idProduct
- *     description:  Returns the roles 
+ *     description:  Returns the roles
  *     tags:
  *       - Roles
  *     responses:
@@ -71,7 +69,7 @@ routes.post('/',VerifyToken.validateToken ,RolesController.createRoles)
  *                 $ref: '#/components/examples/RoleExampleAll'
  *       404:
  *         description: Return error roles not found
- *         content: 
+ *         content:
  *           application/json:
  *             examples:
  *               errorRolesNotFound:
@@ -84,7 +82,7 @@ routes.post('/',VerifyToken.validateToken ,RolesController.createRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/', VerifyToken.validateToken,RolesController.findAllRoles)
+routes.get('/', VerifyToken.validateToken, RolesController.findAllRoles);
 
 /**
  * @swagger
@@ -104,7 +102,7 @@ routes.get('/', VerifyToken.validateToken,RolesController.findAllRoles)
  *                 $ref: '#/components/examples/RoleExample'
  *       404:
  *         description: Return error roles not found
- *         content: 
+ *         content:
  *           application/json:
  *             examples:
  *               errorRolesNotFound:
@@ -117,8 +115,7 @@ routes.get('/', VerifyToken.validateToken,RolesController.findAllRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
-
+routes.get('/:idRole', VerifyToken.validateToken, RolesController.findOneRoles);
 
 /**
  * @swagger
@@ -138,7 +135,7 @@ routes.get('/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
  *                 $ref: '#/components/examples/ExamplePatch'
  *       404:
  *         description: Return error role not found
- *         content: 
+ *         content:
  *           application/json:
  *             examples:
  *               errorRolesNotFound:
@@ -151,8 +148,11 @@ routes.get('/:idRole',VerifyToken.validateToken ,RolesController.findOneRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.patch('/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
-
+routes.patch(
+  '/:idRole',
+  VerifyToken.validateToken,
+  RolesController.updateRoles,
+);
 
 /**
  * @swagger
@@ -164,7 +164,7 @@ routes.patch('/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
  *       - Roles
  *     responses:
  *       200:
- *         description: return boolean true 
+ *         description: return boolean true
  *         content:
  *           application/json:
  *             examples:
@@ -172,7 +172,7 @@ routes.patch('/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
  *                 $ref: '#/components/examples/ExampleDelete'
  *       404:
  *         description: Return error role not found
- *         content: 
+ *         content:
  *           application/json:
  *             examples:
  *               errorRolesNotFound:
@@ -185,6 +185,10 @@ routes.patch('/:idRole',VerifyToken.validateToken ,RolesController.updateRoles)
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.delete('/:idRole', VerifyToken.validateToken,RolesController.deleteRoles)
+routes.delete(
+  '/:idRole',
+  VerifyToken.validateToken,
+  RolesController.deleteRoles,
+);
 
-export default routes
+export default routes;

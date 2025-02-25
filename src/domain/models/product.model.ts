@@ -1,25 +1,30 @@
-import { Check, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import {ProductsCart} from './productsCart.model.ts';
-
+import {
+  Check,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ProductsCart } from './productsCart.model.ts';
 
 @Entity('products')
 @Check('stock > 0')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  price: number
+  price: number;
 
   @Column()
-  description: string
+  description: string;
 
   @Column({})
-  stock: number
+  stock: number;
 
-  @OneToMany(()=>ProductsCart,productCart=>productCart.product)
-  productCart:ProductsCart[];
+  @OneToMany(() => ProductsCart, productCart => productCart.product)
+  productCart: ProductsCart[];
 }

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 
 enum HttpStatus {
   NOT_FOUND = 404,
@@ -17,7 +17,7 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       data: data,
-    })
+    });
   }
 
   public static NOT_FOUND(response: Response, message: string, method: string) {
@@ -26,7 +26,7 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       message: message,
-    })
+    });
   }
 
   public static BAD_REQUEST(
@@ -39,7 +39,7 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       message: message,
-    })
+    });
   }
 
   public static CONFLIC(response: Response, message: string, method: string) {
@@ -48,7 +48,7 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       message: message,
-    })
+    });
   }
 
   public static FORBIDDEN(response: Response, message: string, method: string) {
@@ -57,7 +57,7 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       message: message,
-    })
+    });
   }
 
   public static UNAUTHORIZED(
@@ -70,6 +70,6 @@ export class ReponseHttp {
       timeStamp: new Date(),
       method: method,
       message: message,
-    })
+    });
   }
 }

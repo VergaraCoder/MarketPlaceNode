@@ -1,19 +1,17 @@
-import { Request } from "express"
-
+import { Request } from 'express';
 
 export interface PayloadToken {
-  role: string
-  email: string
-  name: string
-  cart:number
+  role: string;
+  email: string;
+  name: string;
+  cart: number;
 }
 
 export interface PayloadCompleteToken extends PayloadToken {
-  iat?: number
-  exp?: number
+  iat?: number;
+  exp?: number;
 }
 
-
-export interface AuthData extends Request{
-  user:PayloadToken
-} 
+export interface AuthData extends Request {
+  user: PayloadToken;
+}

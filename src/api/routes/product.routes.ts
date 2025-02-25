@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import { ControllerProduct } from '../controllers/product.controller.ts'
-import { ValidateDtoCreateProducts } from '../middlewares/products/validateDto.createProducts.ts'
-import { ValidateDtoUpdateProducts } from '../middlewares/products/validateDto.updateProduct.ts'
-import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
-const routes: Router = Router()
+import { Router } from 'express';
+import { ControllerProduct } from '../controllers/product.controller.ts';
+import { ValidateDtoCreateProducts } from '../middlewares/products/validateDto.createProducts.ts';
+import { ValidateDtoUpdateProducts } from '../middlewares/products/validateDto.updateProduct.ts';
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts';
+const routes: Router = Router();
 
 /**
  * @swagger
@@ -54,7 +54,7 @@ routes.post(
   VerifyToken.validateToken,
   ValidateDtoCreateProducts,
   ControllerProduct.create,
-)
+);
 
 /**
  * @swagger
@@ -87,7 +87,7 @@ routes.post(
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/products', VerifyToken.validateToken, ControllerProduct.findAll)
+routes.get('/products', VerifyToken.validateToken, ControllerProduct.findAll);
 
 /**
  * @swagger
@@ -124,7 +124,7 @@ routes.get(
   '/products/:idProduct',
   VerifyToken.validateToken,
   ControllerProduct.findOneProduct,
-)
+);
 
 /**
  * @swagger
@@ -162,7 +162,7 @@ routes.patch(
   VerifyToken.validateToken,
   ValidateDtoUpdateProducts,
   ControllerProduct.updateProduct,
-)
+);
 
 /**
  * @swagger
@@ -199,6 +199,6 @@ routes.delete(
   '/products/:idProduct',
   VerifyToken.validateToken,
   ControllerProduct.deleteProduct,
-)
+);
 
-export default routes
+export default routes;

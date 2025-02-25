@@ -1,5 +1,3 @@
-import {CreateProductsCartDto} from './createProductsCart.dto.ts';
+import { CreateProductsCartDto } from './createProductsCart.dto.ts';
 
-    export class UpdateProductsCartDto extends CreateProductsCartDto{
-    
-}
+export class UpdateProductsCartDto extends CreateProductsCartDto {}

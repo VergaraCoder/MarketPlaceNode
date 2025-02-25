@@ -1,3 +1,3 @@
-import { DataProduct } from './createProduct.ts'
+import { DataProduct } from './createProduct.ts';
 
 export interface DataUpdateProduct extends DataProduct {}

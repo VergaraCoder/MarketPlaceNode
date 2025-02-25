@@ -12,11 +12,11 @@ export class OrdersController {
   ) {
     try {
       const ordersService: OrdersService = container.resolve(OrdersService);
-      
-      const orderCreate:Orders=await ordersService.create(req.body);
-      res.json({data:orderCreate});
+
+      const orderCreate: Orders = await ordersService.create(req.body);
+      res.json({ data: orderCreate });
     } catch (err: any) {
-        next(err);
+      next(err);
     }
   }
 

@@ -1,3 +1,3 @@
-import { CreateServiceDto } from './createService.dto.ts'
+import { CreateServiceDto } from './createService.dto.ts';
 
 export class UpdateServiceDto extends CreateServiceDto {}

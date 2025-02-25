@@ -1,14 +1,13 @@
-import { Router } from 'express'
-import { ServiceController } from '../controllers/service.controller.ts'
-import { ValidateDtoCreateService } from '../middlewares/service/validateDto.createService.ts'
-import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
-import { ValidateDtoUpdateUser } from '..//middlewares/users/validateDto.updateUser.ts'
-import { ScheduleController } from '../../api/controllers/schedule.controller.ts'
-import { ValidateDtoUpdateSchedule } from '../../api/middlewares/schedule/validateDto.updateSchedule.ts'
-import { ValidateDtoCreateSchedule } from '../../api/middlewares/schedule/validateDto.createSchedule.ts'
+import { Router } from 'express';
+import { ServiceController } from '../controllers/service.controller.ts';
+import { ValidateDtoCreateService } from '../middlewares/service/validateDto.createService.ts';
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts';
+import { ValidateDtoUpdateUser } from '..//middlewares/users/validateDto.updateUser.ts';
+import { ScheduleController } from '../../api/controllers/schedule.controller.ts';
+import { ValidateDtoUpdateSchedule } from '../../api/middlewares/schedule/validateDto.updateSchedule.ts';
+import { ValidateDtoCreateSchedule } from '../../api/middlewares/schedule/validateDto.createSchedule.ts';
 
-const routes: Router = Router()
-
+const routes: Router = Router();
 
 /**
  * @swagger
@@ -59,7 +58,7 @@ routes.post(
   VerifyToken.validateToken,
   ValidateDtoCreateService,
   ServiceController.createService,
-)
+);
 
 /**
  * @swagger
@@ -97,7 +96,7 @@ routes.get(
   VerifyToken.validateToken,
   ValidateDtoUpdateUser,
   ServiceController.findAllService,
-)
+);
 
 /**
  * @swagger
@@ -134,7 +133,7 @@ routes.get(
   '/:idService',
   VerifyToken.validateToken,
   ServiceController.findOneService,
-)
+);
 
 /**
  * @swagger
@@ -171,7 +170,7 @@ routes.patch(
   '/:idService',
   VerifyToken.validateToken,
   ServiceController.updateService,
-)
+);
 
 /**
  * @swagger
@@ -208,9 +207,7 @@ routes.delete(
   '/:idService',
   VerifyToken.validateToken,
   ServiceController.deleteService,
-)
-
-
+);
 
 /**
  * @swagger
@@ -405,4 +402,4 @@ routes.delete(
   ScheduleController.deleteSchedule,
 );
 
-export default routes
+export default routes;

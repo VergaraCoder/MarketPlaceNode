@@ -4,8 +4,8 @@ export default {
     value: {
       id: 1,
       name: 'phone3',
-      description:'The best phone above all',
-      price: 300
+      description: 'The best phone above all',
+      price: 300,
     },
   },
 
@@ -15,14 +15,14 @@ export default {
       {
         id: 1,
         name: 'phone3',
-        description:'The best phone above all',
-        price: 300
+        description: 'The best phone above all',
+        price: 300,
       },
       {
         id: 2,
         name: 'closet',
-        description:'The best closet above all',
-        price: 300
+        description: 'The best closet above all',
+        price: 300,
       },
     ],
   },
@@ -40,7 +40,7 @@ export default {
         'THE DESCRIPTION IS REQUIRED',
         'THE PRICE MUST BE NUMBER',
         'THE PRICE IS REQUIRED',
-    ],
+      ],
     },
   },
 
@@ -61,4 +61,4 @@ export default {
       message: 'PRODUCT NOT FOUND',
     },
   },
-}
+};

@@ -1,4 +1,4 @@
-import { container } from 'tsyringe'
-import { ProductService } from '../services/product.service'
+import { container } from 'tsyringe';
+import { ProductService } from '../services/product.service';
 
-container.registerSingleton<ProductService>(ProductService)
+container.registerSingleton<ProductService>(ProductService);

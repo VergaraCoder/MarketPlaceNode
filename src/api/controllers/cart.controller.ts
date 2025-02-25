@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express'
-import { CartService } from '../../application/services/cart.service.ts'
-import { container } from 'tsyringe'
-import { Result } from '../../utils/resultError/type.result.ts'
-import { Cart } from '../../domain/models/cart.model.ts'
+import { NextFunction, Request, Response } from 'express';
+import { CartService } from '../../application/services/cart.service.ts';
+import { container } from 'tsyringe';
+import { Result } from '../../utils/resultError/type.result.ts';
+import { Cart } from '../../domain/models/cart.model.ts';
 
 export class CartController {
   public static async createCart(
@@ -10,8 +10,7 @@ export class CartController {
     res: Response,
     next: NextFunction,
   ) {
-    const cartService: CartService = container.resolve(CartService)
-
+    const cartService: CartService = container.resolve(CartService);
   }
 
   public static async findAllCart(
@@ -19,9 +18,9 @@ export class CartController {
     res: Response,
     next: NextFunction,
   ) {
-    const cartService: CartService = container.resolve(CartService)
-    const {data,error}:Result<Cart[]>=await cartService.findAll();
-    error ? next(error) : res.json({data:data});
+    const cartService: CartService = container.resolve(CartService);
+    const { data, error }: Result<Cart[]> = await cartService.findAll();
+    error ? next(error) : res.json({ data: data });
   }
 
   public static async findOneCart(
@@ -29,9 +28,11 @@ export class CartController {
     res: Response,
     next: NextFunction,
   ) {
-    const cartService: CartService = container.resolve(CartService)
-    const {data,error}:Result<Cart>=await cartService.findOne(parseInt(req.params.idUser));
-    error ? next(error) : res.json({data:data});
+    const cartService: CartService = container.resolve(CartService);
+    const { data, error }: Result<Cart> = await cartService.findOne(
+      parseInt(req.params.idUser),
+    );
+    error ? next(error) : res.json({ data: data });
   }
 
   public static async updateCart(
@@ -39,9 +40,12 @@ export class CartController {
     res: Response,
     next: NextFunction,
   ) {
-    const cartService: CartService = container.resolve(CartService)
-    const {data,error}:Result<boolean>=await cartService.update(parseInt(req.params.idUser),req.body);
-    error ? next(error) : res.json({data:data});
+    const cartService: CartService = container.resolve(CartService);
+    const { data, error }: Result<boolean> = await cartService.update(
+      parseInt(req.params.idUser),
+      req.body,
+    );
+    error ? next(error) : res.json({ data: data });
   }
 
   public static async deleteCart(
@@ -49,8 +53,10 @@ export class CartController {
     res: Response,
     next: NextFunction,
   ) {
-    const cartService: CartService = container.resolve(CartService)
-    const {data,error}:Result<boolean>=await cartService.delete(parseInt(req.params.idUser));
-    error ? next(error) : res.json({data:data});
+    const cartService: CartService = container.resolve(CartService);
+    const { data, error }: Result<boolean> = await cartService.delete(
+      parseInt(req.params.idUser),
+    );
+    error ? next(error) : res.json({ data: data });
   }
 }

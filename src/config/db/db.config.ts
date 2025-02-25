@@ -1,17 +1,17 @@
-import 'reflect-metadata' //
-import dotenv from 'dotenv'
+import 'reflect-metadata'; //
+import dotenv from 'dotenv';
 // import {User} from '../../domain/models/user.model';
-import { DataSource, DataSourceOptions } from 'typeorm'
-import { User } from '../../domain/models/user.model.ts'
-import { Product } from '../../domain/models/product.model.ts'
-import { Role } from '../../domain/models/roles.model.ts'
-import { Service } from '../../domain/models/service.model.ts'
-import { PriceMode } from '../../domain/models/priceMode.model.ts'
-import { Schedule } from '../../domain/models/schedule.model.ts'
-import { Cart } from '../../domain/models/cart.model.ts'
-import { ProductsCart } from '../../domain/models/productsCart.model.ts'
-import { Orders } from '../../domain/models/orders.model.ts'
-dotenv.config()
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { User } from '../../domain/models/user.model.ts';
+import { Product } from '../../domain/models/product.model.ts';
+import { Role } from '../../domain/models/roles.model.ts';
+import { Service } from '../../domain/models/service.model.ts';
+import { PriceMode } from '../../domain/models/priceMode.model.ts';
+import { Schedule } from '../../domain/models/schedule.model.ts';
+import { Cart } from '../../domain/models/cart.model.ts';
+import { ProductsCart } from '../../domain/models/productsCart.model.ts';
+import { Orders } from '../../domain/models/orders.model.ts';
+dotenv.config();
 
 const dbConnection: DataSource = new DataSource({
   type: 'mysql',
@@ -22,7 +22,17 @@ const dbConnection: DataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [User, Product, Role, Service, PriceMode, Schedule,Cart,ProductsCart,Orders],
-})
+  entities: [
+    User,
+    Product,
+    Role,
+    Service,
+    PriceMode,
+    Schedule,
+    Cart,
+    ProductsCart,
+    Orders,
+  ],
+});
 
-export { dbConnection }
+export { dbConnection };

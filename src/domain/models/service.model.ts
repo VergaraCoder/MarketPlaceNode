@@ -1,34 +1,42 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, ManyToOne, JoinColumn } from 'typeorm'
-import { PriceMode } from './priceMode.model.ts'
-import { Schedule } from './schedule.model.ts'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToMany,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { PriceMode } from './priceMode.model.ts';
+import { Schedule } from './schedule.model.ts';
 
 @Entity('services')
 export class Service {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  description: string
+  description: string;
 
   @Column()
-  pricePerDuration:number
+  pricePerDuration: number;
 
   @Column()
-  rangeOfHoursToWork:string
+  rangeOfHoursToWork: string;
 
   @Column()
-  idPriceMode: number
+  idPriceMode: number;
 
   @Column()
-  idUser: number
+  idUser: number;
 
-  @ManyToOne(()=>PriceMode,priceMode=>priceMode.service)
-  @JoinColumn({name:"idPriceMode"})
-  priceMode:PriceMode
+  @ManyToOne(() => PriceMode, priceMode => priceMode.service)
+  @JoinColumn({ name: 'idPriceMode' })
+  priceMode: PriceMode;
 
-  @OneToMany(()=>Schedule,schedule=>schedule.service)
-  schedules:Schedule[]
+  @OneToMany(() => Schedule, schedule => schedule.service)
+  schedules: Schedule[];
 }

@@ -1,7 +1,7 @@
 // eslint.config.js
-import js from '@eslint/js'
-import ts from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
+import js from '@eslint/js';
+import ts from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
   js.configs.recommended,
@@ -24,4 +24,4 @@ export default [
       '@typescript-eslint/no-unused-vars': ['error'],
     },
   },
-]
+];

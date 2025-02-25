@@ -1,2 +1,2 @@
-import 'reflect-metadata'
-import './app.ts'
+import 'reflect-metadata';
+import './app.ts';

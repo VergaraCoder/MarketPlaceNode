@@ -1,10 +1,10 @@
-import { Router } from 'express'
-import { UserController } from '../controllers/user.controller.ts'
-import { ValidateDtoCreateUser } from '../middlewares/users/validateDto.createUser.ts'
-import { ValidateDtoUpdateUser } from '../middlewares/users/validateDto.updateUser.ts'
-import { VerifyToken } from '../middlewares/auth/validateTokens.ts'
+import { Router } from 'express';
+import { UserController } from '../controllers/user.controller.ts';
+import { ValidateDtoCreateUser } from '../middlewares/users/validateDto.createUser.ts';
+import { ValidateDtoUpdateUser } from '../middlewares/users/validateDto.updateUser.ts';
+import { VerifyToken } from '../middlewares/auth/validateTokens.ts';
 
-const routes: Router = Router()
+const routes: Router = Router();
 /**
  * @swagger
  * tags:
@@ -62,7 +62,7 @@ routes.post(
   '/',
   ValidateDtoCreateUser, // validate user data
   UserController.create, // call the controller and service
-)
+);
 
 /**
  * @swagger
@@ -95,7 +95,7 @@ routes.post(
  *                  userError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/', VerifyToken.validateToken, UserController.allUsers)
+routes.get('/', VerifyToken.validateToken, UserController.allUsers);
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ routes.get(
   '/:idUser',
   VerifyToken.validateToken, // middleware validate tokens in headers
   UserController.getOneUser, // controller to return one user
-)
+);
 
 /**
  * @swagger
@@ -170,7 +170,7 @@ routes.patch(
   VerifyToken.validateToken, // Validate tokens
   ValidateDtoUpdateUser, // Validate DTO
   UserController.update, // controller to update user
-)
+);
 
 /**
  * @swagger
@@ -207,6 +207,6 @@ routes.delete(
   '/:idUser',
   VerifyToken.validateToken, // Validate tokens
   UserController.delete, // controller to delete user
-)
+);
 
-export default routes
+export default routes;

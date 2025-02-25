@@ -1,31 +1,31 @@
-import { Service } from '../../domain/models/service.model.ts'
-import { ServiceRepository } from '../../domain/repositories/service.repository.ts'
-import { CreateServiceDto } from '../dto/service/createService.dto.ts'
-import { ManageError } from '../errors/error.custom.ts'
+import { Service } from '../../domain/models/service.model.ts';
+import { ServiceRepository } from '../../domain/repositories/service.repository.ts';
+import { CreateServiceDto } from '../dto/service/createService.dto.ts';
+import { ManageError } from '../errors/error.custom.ts';
 
 export class ServiceService {
   async create(dataServiceDto: CreateServiceDto) {
     try {
-      const serviceData: Service = ServiceRepository.create(dataServiceDto)
-      await ServiceRepository.save(serviceData)
-      return serviceData
+      const serviceData: Service = ServiceRepository.create(dataServiceDto);
+      await ServiceRepository.save(serviceData);
+      return serviceData;
     } catch (err: any) {
-      throw err
+      throw err;
     }
   }
 
   async findAll() {
     try {
-      const services: Service[] = await ServiceRepository.find()
+      const services: Service[] = await ServiceRepository.find();
       if (services.length == 0) {
         throw new ManageError({
           type: 'NOT_FOUND',
           message: 'THERE ARE NOT SERVICE',
-        })
+        });
       }
-      return services
+      return services;
     } catch (err: any) {
-      throw ManageError.signedError(err.message)
+      throw ManageError.signedError(err.message);
     }
   }
 
@@ -33,16 +33,16 @@ export class ServiceService {
     try {
       const service: Service | null = await ServiceRepository.findOneBy({
         id: id,
-      })
+      });
       if (!service) {
         throw new ManageError({
           type: 'NOT_FOUND',
           message: 'THERE ARE NOT SERVICE',
-        })
+        });
       }
-      return service
+      return service;
     } catch (err: any) {
-      throw ManageError.signedError(err.message)
+      throw ManageError.signedError(err.message);
     }
   }
 
@@ -51,31 +51,31 @@ export class ServiceService {
       const { affected }: number | any = await ServiceRepository.update(
         id,
         dataUpdateService,
-      )
+      );
       if (affected == 0) {
         throw new ManageError({
           type: 'NOT_FOUND',
           message: 'FAILED TO UPDATE SERVICE',
-        })
+        });
       }
-      return true
+      return true;
     } catch (err: any) {
-      throw ManageError.signedError(err.message)
+      throw ManageError.signedError(err.message);
     }
   }
 
   async delete(id: number) {
     try {
-      const { affected }: number | any = await ServiceRepository.delete(id)
+      const { affected }: number | any = await ServiceRepository.delete(id);
       if (affected == 0) {
         throw new ManageError({
           type: 'NOT_FOUND',
           message: 'FAILED TO DELETED SERVICE',
-        })
+        });
       }
-      return true
+      return true;
     } catch (err: any) {
-      throw ManageError.signedError(err.message)
+      throw ManageError.signedError(err.message);
     }
   }
 }

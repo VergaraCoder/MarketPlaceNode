@@ -79,4 +79,4 @@ export default {
       message: 'EL EMAIL INGRESADO YA ESTA REGISTRADO',
     },
   },
-}
+};

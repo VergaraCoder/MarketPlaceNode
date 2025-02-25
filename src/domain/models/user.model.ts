@@ -4,36 +4,36 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn
-} from 'typeorm'
-import { Role } from './roles.model.ts'
-import { Schedule } from './schedule.model.ts'
-import {Cart} from './cart.model.ts';
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Role } from './roles.model.ts';
+import { Schedule } from './schedule.model.ts';
+import { Cart } from './cart.model.ts';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
-  @Column({unique:true})
-  email: string
-
-  @Column()
-  password: string
+  @Column({ unique: true })
+  email: string;
 
   @Column()
-  idRole: number
+  password: string;
+
+  @Column()
+  idRole: number;
 
   @ManyToOne(() => Role, role => role.users, { eager: true })
   @JoinColumn({ name: 'idRole' })
-  role: Role
+  role: Role;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.user)
-  schedules: Schedule[]
+  @OneToMany(() => Schedule, schedule => schedule.user)
+  schedules: Schedule[];
 
-  @OneToMany(() => Cart, (cart) => cart.user)
-  cart: Cart[]
+  @OneToMany(() => Cart, cart => cart.user)
+  cart: Cart[];
 }

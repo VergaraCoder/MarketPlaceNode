@@ -1,3 +1,3 @@
-export class CreateCartDto{
-    idUser:number;
+export class CreateCartDto {
+  idUser: number;
 }

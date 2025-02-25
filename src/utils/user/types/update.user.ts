@@ -1,1 +1,1 @@
-export type affectedCount = number
+export type affectedCount = number;

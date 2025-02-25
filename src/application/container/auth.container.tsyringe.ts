@@ -1,4 +1,4 @@
-import { container } from 'tsyringe'
-import { AuthService } from '../services/auth.service.ts'
+import { container } from 'tsyringe';
+import { AuthService } from '../services/auth.service.ts';
 
-container.registerSingleton<AuthService>(AuthService)
+container.registerSingleton<AuthService>(AuthService);

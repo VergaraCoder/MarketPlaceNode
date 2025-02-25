@@ -1,4 +1,4 @@
-import { container } from 'tsyringe'
-import { ServiceService } from '../services/service.service.ts'
+import { container } from 'tsyringe';
+import { ServiceService } from '../services/service.service.ts';
 
-container.registerSingleton<ServiceService>(ServiceService)
+container.registerSingleton<ServiceService>(ServiceService);
