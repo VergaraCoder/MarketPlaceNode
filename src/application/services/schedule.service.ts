@@ -10,7 +10,15 @@ import { DeleteResult, UpdateResult } from 'typeorm'
 
 export class ScheduleService {
   async create(dataToCreateSchedule: CreateScheduleDto) {
+    const dateCurrent:Date=new Date();
+    const dateSent:Date=new Date(dataToCreateSchedule.date);
     try {
+      if(dateSent.getTime()<dateCurrent.getTime()){
+        throw new ManageError({
+          type:"CONFLIC",
+          message:'THE DATE SENT MUST BE HIGTHER THAN THE CURRENT DATE',
+        });
+      }
       const serviceService: ServiceService = container.resolve(ServiceService)
       await serviceService.findOne(dataToCreateSchedule.idService)
       const scheduleData = ScheduleRepository.create(dataToCreateSchedule)
