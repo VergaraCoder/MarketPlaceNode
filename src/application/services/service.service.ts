@@ -1,81 +1,91 @@
-import { Service } from '../../domain/models/service.model.ts'
-import { ServiceRepository } from '../../domain/repositories/service.repository.ts'
-import { CreateServiceDto } from '../dto/service/createService.dto.ts'
-import { ManageError } from '../errors/error.custom.ts'
+import { Result } from 'utils/resultError/type.result.ts';
+import { Service } from '../../domain/models/service.model.ts';
+import { ServiceRepository } from '../../domain/repositories/service.repository.ts';
+import { CreateServiceDto } from '../dto/service/createService.dto.ts';
+import { ManageError } from '../errors/error.custom.ts';
 
 export class ServiceService {
   async create(dataServiceDto: CreateServiceDto) {
     try {
-      const serviceData: Service = ServiceRepository.create(dataServiceDto)
-      await ServiceRepository.save(serviceData)
-      return serviceData
+      const serviceData: Service = ServiceRepository.create(dataServiceDto);
+      await ServiceRepository.save(serviceData);
+      return serviceData;
     } catch (err: any) {
-      throw err
+      throw err;
     }
   }
 
-  async findAll() {
-    try {
-      const services: Service[] = await ServiceRepository.find()
-      if (services.length == 0) {
-        throw new ManageError({
+  async findAll(): Promise<Result<Service[]>> {
+    const services: Service[] = await ServiceRepository.find();
+    if (services.length == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'THERE ARE NOT SERVICE',
-        })
-      }
-      return services
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+        }),
+      };
     }
+    return {
+      data: services,
+      error: null,
+    };
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Service> {
     try {
       const service: Service | null = await ServiceRepository.findOneBy({
         id: id,
-      })
+      });
       if (!service) {
         throw new ManageError({
           type: 'NOT_FOUND',
           message: 'THERE ARE NOT SERVICE',
-        })
+        });
       }
-      return service
+      return service;
     } catch (err: any) {
-      throw ManageError.signedError(err.message)
+      throw ManageError.signedError(err.message);
     }
   }
 
-  async update(id: number, dataUpdateService: Partial<CreateServiceDto>) {
-    try {
-      const { affected }: number | any = await ServiceRepository.update(
-        id,
-        dataUpdateService,
-      )
-      if (affected == 0) {
-        throw new ManageError({
+  async update(
+    id: number,
+    dataUpdateService: Partial<CreateServiceDto>,
+  ): Promise<Result<Boolean>> {
+    const { affected }: number | any = await ServiceRepository.update(
+      id,
+      dataUpdateService,
+    );
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'FAILED TO UPDATE SERVICE',
-        })
-      }
-      return true
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+        }),
+      };
     }
+    return {
+      data: true,
+      error: null,
+    };
   }
 
-  async delete(id: number) {
-    try {
-      const { affected }: number | any = await ServiceRepository.delete(id)
-      if (affected == 0) {
-        throw new ManageError({
+  async delete(id: number): Promise<Result<Boolean>> {
+    const { affected }: number | any = await ServiceRepository.delete(id);
+    if (affected == 0) {
+      return {
+        data: null,
+        error: new ManageError({
           type: 'NOT_FOUND',
           message: 'FAILED TO DELETED SERVICE',
-        })
-      }
-      return true
-    } catch (err: any) {
-      throw ManageError.signedError(err.message)
+        }),
+      };
     }
+    return {
+      data: true,
+      error: null,
+    };
   }
 }
