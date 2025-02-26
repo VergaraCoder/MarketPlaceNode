@@ -1,11 +1,11 @@
 import { ManageError } from 'application/errors/error.custom.ts';
 
-type ErrorResult = {
+export type ErrorResult = {
   data: null;
   error: ManageError;
 };
 
-type SuccessResult<T> = {
+export type SuccessResult<T> = {
   data: T;
   error: null;
 };

@@ -4,3 +4,8 @@ export class CreateUserDto {
   password: string;
   idRole: number;
 }
+
+
+export class CreateUserDtoAlready extends CreateUserDto{
+  id:number
+}

@@ -5,17 +5,17 @@ import { Role } from '../../domain/models/roles.model.ts';
 import { Result } from 'utils/resultError/type.result.ts';
 
 export class RolesController {
-  public static async createRoles(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) {
-    const rolesService: RolesService = container.resolve(RolesService);
-    const role: Role = await rolesService.create(req.body);
-    res.json({
-      message: 'create succesfully',
-      data: role,
-    });
+  public static async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      const rolesService: RolesService = container.resolve(RolesService);
+      const role: Role = await rolesService.create(req.body);
+      res.json({
+        message: 'create succesfully',
+        data: role,
+      });
+    } catch (err: any) {
+      next(err);
+    }
   }
 
   public static async findAllRoles(
@@ -35,7 +35,7 @@ export class RolesController {
   ) {
     const rolesService: RolesService = container.resolve(RolesService);
     const { data, error }: Result<Role> = await rolesService.findOne(
-      parseInt(req.params.id),
+      parseInt(req.params.idRole),
     );
     error ? next(error) : res.json({ message: 'find one succesfully', data });
   }

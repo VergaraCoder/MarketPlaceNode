@@ -49,7 +49,7 @@ const routes: Router = Router();
  *                  roleeError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.post('/', VerifyToken.validateToken, RolesController.createRoles);
+routes.post('/', VerifyToken.validateToken, RolesController.create);
 
 /**
  * @swagger

@@ -2,14 +2,24 @@ import { Result } from 'utils/resultError/type.result.ts';
 import { Role } from '../../domain/models/roles.model.ts';
 import { RoleRepository } from '../../domain/repositories/roles.repository.ts';
 import { CreateRolesDto } from '../dto/roles/createRoles.dto.ts';
-import { ManageError } from '../errors/error.custom.ts';
+import { ManageError } from 'application/errors/error.custom.ts';
 import { DeleteResult, UpdateResult } from 'typeorm';
 
 export class RolesService {
   async create(data: CreateRolesDto) {
-    const roleRepo: Role = RoleRepository.create(data);
-    await RoleRepository.save(roleRepo);
-    return roleRepo;
+    try {
+      const roleRepo: Role = RoleRepository.create(data);
+      await RoleRepository.save(roleRepo);
+      return roleRepo;
+    } catch (err: any) {
+      if(err.errno == 1452){
+        throw new ManageError({
+          type:"CONFLIC",
+          message:"THE ROLE ALREADY EXIST"
+        });
+      }
+      throw ManageError.signedError(err.message);
+    }
   }
 
   async findAll(): Promise<Result<Role[]>> {
