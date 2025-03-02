@@ -6,15 +6,12 @@ import { Result } from 'utils/resultError/type.result.ts';
 
 export class ControllerProduct {
   public static async create(req: Request, res: Response, next: NextFunction) {
-    try {
-      const productService: ProductService = container.resolve(ProductService);
-      const product = productService.createProduct(req.body);
-      res.status(200).json({
-        message: 'Product created successfully',
-      });
-    } catch (err: any) {
-      next(err);
-    }
+    const productService: ProductService = container.resolve(ProductService);
+    const product: Product = await productService.createProduct(req.body);
+    res.json({
+      message: 'Product created successfully',
+      data: product,
+    });
   }
 
   public static async findAll(req: Request, res: Response, next: NextFunction) {
@@ -36,7 +33,7 @@ export class ControllerProduct {
   ) {
     const productService: ProductService = container.resolve(ProductService);
     const { data, error }: Result<Product> =
-      await productService.getOneProductById(parseInt(req.params['idProduct']));
+      await productService.getOneProductById(parseInt(req.params.idProduct));
     error
       ? next(error)
       : res.json({
@@ -52,7 +49,7 @@ export class ControllerProduct {
   ) {
     const productService: ProductService = container.resolve(ProductService);
     const { data, error }: Result<boolean> = await productService.updateProduct(
-      parseInt(req.params['id']),
+      parseInt(req.params.idProduct),
       req.body,
     );
     error
@@ -70,7 +67,7 @@ export class ControllerProduct {
   ) {
     const productService: ProductService = container.resolve(ProductService);
     const { data, error }: Result<boolean> = await productService.deleteProduct(
-      parseInt(req.params['id']),
+      parseInt(req.params.idProduct),
     );
     error ? next(error) : res.json({ message: 'delete product', data: data });
   }

@@ -17,14 +17,14 @@ export const mockRolesAllData: CreateRolesDto[] | any[] = [
   },
 ];
 
-export const mockOneRoleResult:SuccessResult<any>={
-    data:mockRoleData,
-    error:null
+export const mockOneRoleResult: SuccessResult<any> = {
+  data: mockRoleData,
+  error: null,
 };
 
-export const mockAllRolesResult:SuccessResult<any>={
-    data:mockRolesAllData,
-    error:null
+export const mockAllRolesResult: SuccessResult<any> = {
+  data: mockRolesAllData,
+  error: null,
 };
 
 export const mockDeleteRole: SuccessResult<boolean> = {

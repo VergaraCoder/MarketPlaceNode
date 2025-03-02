@@ -10,16 +10,12 @@ export class ServiceController {
     res: Response,
     next: NextFunction,
   ) {
-    try {
-      const serviceService: ServiceService = container.resolve(ServiceService);
-      const service = await serviceService.create(req.body);
-      res.json({
-        message: 'Service created successfully',
-        data: service,
-      });
-    } catch (err: any) {
-      next(err);
-    }
+    const serviceService: ServiceService = container.resolve(ServiceService);
+    const service = await serviceService.create(req.body);
+    res.json({
+      message: 'Service created successfully',
+      data: service,
+    });
   }
 
   public static async findAllService(

@@ -8,7 +8,7 @@ import {
   mockRolesAllData,
   mockUpdateRole,
   mockAllRolesResult,
-  mockOneRoleResult
+  mockOneRoleResult,
 } from './__mocks__/role/res/role.response.ts';
 import {
   mockNext,
@@ -51,7 +51,11 @@ describe('RolesController', () => {
 
   it('should get all roles successfully', async () => {
     rolesService.findAll.mockResolvedValueOnce(mockAllRolesResult);
-    await RolesController.findAllRoles(mockRequestRole, mockResponseRole, mockNext);
+    await RolesController.findAllRoles(
+      mockRequestRole,
+      mockResponseRole,
+      mockNext,
+    );
     expect(rolesService.findAll).toHaveBeenCalledWith();
     expect(mockResponseRole.json).toHaveBeenCalledWith({
       message: 'find all succesfully',
@@ -61,7 +65,11 @@ describe('RolesController', () => {
 
   it('should get one role successfully', async () => {
     rolesService.findOne.mockResolvedValueOnce(mockOneRoleResult);
-    await RolesController.findOneRoles(mockRequestRole, mockResponseRole, mockNext);
+    await RolesController.findOneRoles(
+      mockRequestRole,
+      mockResponseRole,
+      mockNext,
+    );
     expect(rolesService.findOne).toHaveBeenCalledWith(
       parseInt(mockRequestRole.params.idRole),
     );
@@ -73,7 +81,11 @@ describe('RolesController', () => {
 
   it('Should delete a role succesfully', async () => {
     rolesService.delete.mockResolvedValueOnce(mockDeleteRole);
-    await RolesController.deleteRoles(mockRequestRole, mockResponseRole, mockNext);
+    await RolesController.deleteRoles(
+      mockRequestRole,
+      mockResponseRole,
+      mockNext,
+    );
     expect(rolesService.delete).toHaveBeenCalledWith(
       parseInt(mockRequestRole.params.idRole),
     );
@@ -93,7 +105,11 @@ describe('RolesController', () => {
 
   it('should handle update route', async () => {
     rolesService.update.mockResolvedValueOnce(mockUpdateRole);
-    await RolesController.updateRoles(mockRequestRole, mockResponseRole, mockNext);
+    await RolesController.updateRoles(
+      mockRequestRole,
+      mockResponseRole,
+      mockNext,
+    );
     expect(rolesService.update).toHaveBeenCalledWith(
       parseInt(mockRequestRole.params.idRole),
       mockRequestRole.body,

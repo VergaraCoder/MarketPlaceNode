@@ -5,7 +5,6 @@ export class CreateUserDto {
   idRole: number;
 }
 
-
-export class CreateUserDtoAlready extends CreateUserDto{
-  id:number
+export class CreateUserDtoAlready extends CreateUserDto {
+  id: number;
 }

@@ -9,7 +9,7 @@ import { Result } from 'utils/resultError/type.result.ts';
 import { DeleteResult, UpdateResult } from 'typeorm';
 
 export class ScheduleService {
-  async create(dataToCreateSchedule: CreateScheduleDto) {
+  async create(dataToCreateSchedule: CreateScheduleDto):Promise<Schedule> {
     const dateCurrent: Date = new Date();
     const dateSent: Date = new Date(dataToCreateSchedule.date);
     try {
@@ -19,6 +19,7 @@ export class ScheduleService {
           message: 'THE DATE SENT MUST BE HIGTHER THAN THE CURRENT DATE',
         });
       }
+
       const serviceService: ServiceService = container.resolve(ServiceService);
       await serviceService.findOne(dataToCreateSchedule.idService);
       const scheduleData = ScheduleRepository.create(dataToCreateSchedule);
@@ -36,7 +37,7 @@ export class ScheduleService {
     }
   }
 
-  async findAll(idService: number) {
+  async findAll(idService: number): Promise<string[]> {
     try {
       const dateCurrent: Date = new Date();
 
@@ -55,7 +56,7 @@ export class ScheduleService {
       const maxHour: number = parseInt(
         oneService.rangeOfHoursToWork.split(',')[1],
       );
-      let hoursAvailables: Date[] = [];
+      let hoursAvailables: string[] = [];
       for (let day = 0; day <= dayToFinishWeek; day++) {
         const startDate = new Date(dateCurrent);
         startDate.setHours(minHour, 0, 0);
@@ -78,7 +79,7 @@ export class ScheduleService {
               : false;
 
           if (!IsOcupped) {
-            hoursAvailables.push(dayCandidate);
+            hoursAvailables.push(dayCandidate.toISOString());
           }
         }
       }

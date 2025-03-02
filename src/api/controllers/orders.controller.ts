@@ -27,7 +27,7 @@ export class OrdersController {
   ) {
     const ordersService: OrdersService = container.resolve(OrdersService);
     const { data, error }: Result<Orders[]> = await ordersService.findAll();
-    error ? next(error) : res.json(data);
+    error ? next(error) : res.json({data:data});
   }
 
   public static async findOneOrders(
@@ -37,9 +37,9 @@ export class OrdersController {
   ) {
     const ordersService: OrdersService = container.resolve(OrdersService);
     const { data, error }: Result<Orders> = await ordersService.findOne(
-      parseInt(req.params.id),
+      parseInt(req.params.idOrder),
     );
-    error ? next(error) : res.json(data);
+    error ? next(error) : res.json({data:data});
   }
 
   public static async updateOrders(
@@ -49,7 +49,7 @@ export class OrdersController {
   ) {
     const ordersService: OrdersService = container.resolve(OrdersService);
     const { data, error }: Result<boolean> = await ordersService.update(
-      parseInt(req.params.id),
+      parseInt(req.params.idOrder),
       req.body,
     );
     error ? next(error) : res.json(data);
@@ -62,7 +62,7 @@ export class OrdersController {
   ) {
     const ordersService: OrdersService = container.resolve(OrdersService);
     const { data, error }: Result<boolean> = await ordersService.delete(
-      parseInt(req.params.id),
+      parseInt(req.params.idOrder),
     );
     error ? next(error) : res.json(data);
   }

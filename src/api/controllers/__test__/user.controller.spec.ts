@@ -14,7 +14,10 @@ import {
   mockRequestUser,
   mockResponseUser,
 } from './__mocks__/user/argumentController.ts';
-import { mockThrowError1, mockThrowError2 } from './__mocks__/user/errors/user.error.ts';
+import {
+  mockThrowError1,
+  mockThrowError2,
+} from './__mocks__/user/errors/user.error.ts';
 
 jest.mock('../../../application/services/user.service.ts', () => {
   return {
@@ -37,7 +40,7 @@ describe('UserController', () => {
     jest
       .spyOn(container, 'resolve')
       .mockReturnValue(userService as unknown as UserService);
-      jest.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should create user', async () => {
@@ -103,7 +106,6 @@ describe('UserController', () => {
     expect(mockNext).toHaveBeenCalledTimes(1);
     expect(mockNext).toHaveBeenCalledWith(mockThrowError1);
   });
-
 
   it('should retur error reject2', async () => {
     userService.create.mockRejectedValueOnce(mockThrowError2);

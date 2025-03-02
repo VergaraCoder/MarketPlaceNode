@@ -17,13 +17,6 @@ export class ProductsCartController {
 
       const payloadToken: PayloadToken = (req as AuthData).user;
 
-      console.log('THE DATA USER IS ');
-
-      console.log(payloadToken);
-
-      console.log('DATA BODY');
-      console.log(req.body);
-
       const createProductCart: ProductsCart = await productsCartService.create({
         ...req.body,
         idCart: payloadToken.cart,
@@ -70,7 +63,7 @@ export class ProductsCartController {
     const productsCartService: ProductsCartService =
       container.resolve(ProductsCartService);
     const { data, error }: Result<ProductsCart> =
-      await productsCartService.findOne(parseInt(req.params.id));
+      await productsCartService.findOne(parseInt(req.params.idItem));
     error ? next(error) : res.json({ data });
   }
 
@@ -82,7 +75,7 @@ export class ProductsCartController {
     const productsCartService: ProductsCartService =
       container.resolve(ProductsCartService);
     const { data, error }: Result<boolean> = await productsCartService.update(
-      parseInt(req.params.id),
+      parseInt(req.params.idItem),
       req.body,
     );
     error ? next(error) : res.json({ data });
@@ -95,9 +88,8 @@ export class ProductsCartController {
   ) {
     const productsCartService: ProductsCartService =
       container.resolve(ProductsCartService);
-    const { data, error }: Result<boolean> = await productsCartService.update(
-      parseInt(req.params.id),
-      req.body,
+    const { data, error }: Result<boolean> = await productsCartService.delete(
+      parseInt(req.params.idItem),
     );
     error ? next(error) : res.json({ data });
   }

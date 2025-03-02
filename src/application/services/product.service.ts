@@ -10,17 +10,10 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateProductDto } from 'application/dto/products/createProduct.dto.ts';
 
 export class ProductService {
-  async createProduct(dataProduct: DataProduct) {
-    try {
-      const dataProductCreate: Product = ProductRepository.create(dataProduct);
-      await ProductRepository.save(dataProductCreate);
-      return dataProductCreate;
-    } catch (err: any) {
-      console.log('THE ERROR IS ');
-      console.log(err);
-
-      throw err;
-    }
+  async createProduct(dataProduct: DataProduct): Promise<Product> {
+    const dataProductCreate: Product = ProductRepository.create(dataProduct);
+    await ProductRepository.save(dataProductCreate);
+    return dataProductCreate;
   }
 
   async getAllProducts(): Promise<Result<Product[]>> {

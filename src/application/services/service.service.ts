@@ -6,13 +6,9 @@ import { ManageError } from '../errors/error.custom.ts';
 
 export class ServiceService {
   async create(dataServiceDto: CreateServiceDto) {
-    try {
-      const serviceData: Service = ServiceRepository.create(dataServiceDto);
-      await ServiceRepository.save(serviceData);
-      return serviceData;
-    } catch (err: any) {
-      throw err;
-    }
+    const serviceData: Service = ServiceRepository.create(dataServiceDto);
+    await ServiceRepository.save(serviceData);
+    return serviceData;
   }
 
   async findAll(): Promise<Result<Service[]>> {

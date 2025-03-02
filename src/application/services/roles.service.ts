@@ -12,10 +12,10 @@ export class RolesService {
       await RoleRepository.save(roleRepo);
       return roleRepo;
     } catch (err: any) {
-      if(err.errno == 1452){
+      if (err.errno == 1452) {
         throw new ManageError({
-          type:"CONFLIC",
-          message:"THE ROLE ALREADY EXIST"
+          type: 'CONFLIC',
+          message: 'THE ROLE ALREADY EXIST',
         });
       }
       throw ManageError.signedError(err.message);

@@ -34,7 +34,7 @@ export class ScheduleController {
       parseInt(req.params.idService),
     );
     res.json({
-      message: 'Estos son los horaros disponibles',
+      message: 'this are the availables schedules',
       schedules: schedules,
     });
   }
