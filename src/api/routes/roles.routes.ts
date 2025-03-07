@@ -187,8 +187,8 @@ routes.patch(
  */
 routes.delete(
   '/:idRole',
-  VerifyToken.validateToken,
-  RolesController.deleteRoles,
+  // VerifyToken.validateToken,
+  RolesController.delete2Roles,
 );
 
 export default routes;

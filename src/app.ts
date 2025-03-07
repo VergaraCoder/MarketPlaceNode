@@ -6,6 +6,9 @@ import { runSeeders } from 'typeorm-extension';
 import { SeederPriceMode } from './config/db/seeders/priceMode.seeder.ts';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpect from './swagger.ts';
+import {createServer} from 'http';
+import {} from 'socket.io';
+
 
 const server: Express = express();
 

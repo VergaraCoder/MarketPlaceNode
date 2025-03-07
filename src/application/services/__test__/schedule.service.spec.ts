@@ -14,15 +14,14 @@ import {
   mockToCreateSchedudule,
   mockUpdate,
   mockUpdateSchedule,
-} from './__mock__/schedule/response.ts';
+} from './__mock__/schedule/response.schedule.ts';
 import { ScheduleRepository } from '../../../domain/repositories/schedule.repository.ts';
 import { container } from 'tsyringe';
 import { Result } from '../../../utils/resultError/type.result.ts';
 import { Schedule } from '../../../domain/models/schedule.model.ts';
 
 jest.mock('../service.service.ts');
-jest.mock('../../../domain/repositories/schedule.repository.ts');
-jest.mock('../../errors/error.custom.ts');
+// jest.mock('../../errors/error.custom.ts');
 
 describe('ScheduleService', () => {
   let scheduleService: ScheduleService;
@@ -99,7 +98,7 @@ describe('ScheduleService', () => {
   });
 
 
-  it('', async ()=>{
+  it('should delete schedules', async ()=>{
     const idSchedule:number=1;
 
     ScheduleRepository.delete=mockDeleteSchedule;

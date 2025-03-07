@@ -6,17 +6,23 @@ import * as crypt from 'bcrypt';
 import { Result } from '../../utils/resultError/type.result.ts';
 import { CreateUserDto } from 'application/dto/user/createUser.dto.ts';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { dbConnection } from '../../config/db/db.config.ts';
 
 export class UserService {
   async create(data: any): Promise<User | User[] | any> {
     try {
       const hashPassword: string = await crypt.hash(data.password, 10);
-      const dataUser: User | User[] = UserRepository.create({
-        ...data,
-        password: hashPassword,
-      });
-      await UserRepository.save(dataUser);
-      return dataUser;
+      const queryCreate:string=`
+        INSERT INTO users(name,email,password,idRole)
+        VALUES(?,?,?,?)
+      `;
+      const {insertId}:any=await dbConnection.query(queryCreate,[data.name,data.email,hashPassword,data.idRole]);
+
+      const queryGetUser:string=`
+        SELECT * FROM users WHERE id=?
+      `;
+      const result:any=await dbConnection.query(queryGetUser,[insertId]);      
+      return result[0];
     } catch (err: any) {
       if (err.errno == 1452) {
         throw new ManageError({

@@ -64,4 +64,18 @@ export class RolesController {
     );
     error ? next(error) : res.json({ message: 'delete succesfully', data });
   }
+
+
+
+  public static async delete2Roles(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    const rolesService: RolesService = container.resolve(RolesService);
+    const { data, error }: Result<boolean> = await rolesService.delete(
+      parseInt(req.params.idRole),
+    );
+    error ? next(error) : res.json({ message: 'delete succesfully', data });
+  }
 }

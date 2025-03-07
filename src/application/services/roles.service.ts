@@ -2,14 +2,19 @@ import { Result } from 'utils/resultError/type.result.ts';
 import { Role } from '../../domain/models/roles.model.ts';
 import { RoleRepository } from '../../domain/repositories/roles.repository.ts';
 import { CreateRolesDto } from '../dto/roles/createRoles.dto.ts';
-import { ManageError } from 'application/errors/error.custom.ts';
+import { ManageError } from '../errors/error.custom.ts';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { dbConnection } from '../../config/db/db.config.ts';
+import { User } from 'domain/models/user.model.ts';
 
 export class RolesService {
   async create(data: CreateRolesDto) {
     try {
       const roleRepo: Role = RoleRepository.create(data);
       await RoleRepository.save(roleRepo);
+      const query=`
+        INSERT INTO 
+      `;
       return roleRepo;
     } catch (err: any) {
       if (err.errno == 1452) {
@@ -21,6 +26,16 @@ export class RolesService {
       throw ManageError.signedError(err.message);
     }
   }
+
+  /*
+OrderDetails
+Categories
+Suppliers
+Products
+Customers
+Employees
+Orders
+*/
 
   async findAll(): Promise<Result<Role[]>> {
     const roles: Role[] = await RoleRepository.find();

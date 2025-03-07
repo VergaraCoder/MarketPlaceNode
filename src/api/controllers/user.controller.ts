@@ -9,9 +9,9 @@ export class UserController {
   public static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const userService2 = container.resolve(UserService);
-      await userService2.create(req.body);
+      const user=await userService2.create(req.body);
       res.json({
-        message: 'melo',
+        message: 'melo', data:user
       });
     } catch (err: any) {
       next(err);
