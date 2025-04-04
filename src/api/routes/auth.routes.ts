@@ -5,12 +5,13 @@ import { VerifyUser } from '../middlewares/auth/validateUser/validateUser.ts';
 
 const routes: Router = Router();
 
+
 routes.post(
   '/login',
   ValidateDtoAuth,
   VerifyUser.validate,
   AuthController.createAuth,
 );
-routes.get('/auth/renovate', AuthController.renovateAcessToken);
+routes.get('/renovateToken', AuthController.renovateAcessToken);
 
 export default routes;

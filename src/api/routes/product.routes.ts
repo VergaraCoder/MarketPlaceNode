@@ -51,7 +51,7 @@ const routes: Router = Router();
  */
 routes.post(
   '/',
-  VerifyToken.validateToken,
+  // VerifyToken.validateToken,
   ValidateDtoCreateProducts,
   ControllerProduct.create,
 );
@@ -87,7 +87,7 @@ routes.post(
  *                  productError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/products', VerifyToken.validateToken, ControllerProduct.findAll);
+routes.get('/', ControllerProduct.findAll);
 
 /**
  * @swagger
@@ -158,7 +158,7 @@ routes.get(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.patch(
-  '/products/:idProduct',
+  '/:idProduct',
   VerifyToken.validateToken,
   ValidateDtoUpdateProducts,
   ControllerProduct.updateProduct,
@@ -196,7 +196,7 @@ routes.patch(
  *                      $ref: '#/components/examples/ExampleError500'
  */
 routes.delete(
-  '/products/:idProduct',
+  '/:idProduct',
   VerifyToken.validateToken,
   ControllerProduct.deleteProduct,
 );

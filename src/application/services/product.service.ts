@@ -8,6 +8,7 @@ import { Result } from 'utils/resultError/type.result.ts';
 import { error } from 'console';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreateProductDto } from 'application/dto/products/createProduct.dto.ts';
+import { dbConnection } from '../../config/db/db.config.ts';
 
 export class ProductService {
   async createProduct(dataProduct: DataProduct): Promise<Product> {
@@ -27,12 +28,24 @@ export class ProductService {
         }),
       };
     }
-
     return {
       data: products,
       error: null,
     };
   }
+
+  async getAllProductsByIdUser(idUser:number){
+    const query:string=`
+    SELECT 
+    prod.*,
+    usr.name AS nameSeller 
+    FROM products AS prod
+    LEFT JOIN users AS usr ON prod.idSeller = usr.id
+    WHERE idSeller = ?
+    `;
+    const products:Product[]=await dbConnection.query(query,[idUser]);
+    return products;
+  };
 
   async getOneProductById(idProduct: number): Promise<Result<Product>> {
     const product: Product | null = await ProductRepository.findOneBy({

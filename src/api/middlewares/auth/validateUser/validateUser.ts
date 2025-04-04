@@ -23,10 +23,12 @@ export class VerifyUser {
     } else {
       const cart: Cart = await cartService.findOneByIdUser(user.id);
       const payload: PayloadToken = {
+        id:user.id,
         role: user.role.name,
         name: user.name,
         email: user.email,
         cart: cart.id,
+        chatId:user.chatId
       };
       req.body = { ...req.body, ...payload };
       next();

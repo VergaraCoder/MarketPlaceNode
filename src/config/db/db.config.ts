@@ -11,6 +11,8 @@ import { Schedule } from '../../domain/models/schedule.model.ts';
 import { Cart } from '../../domain/models/cart.model.ts';
 import { ProductsCart } from '../../domain/models/productsCart.model.ts';
 import { Orders } from '../../domain/models/orders.model.ts';
+import {Conversation} from '../../domain/models/conversations.model.ts';
+import {Message} from '../../domain/models/messages.model.ts';
 dotenv.config();
 
 const dbConnection: DataSource = new DataSource({
@@ -21,7 +23,7 @@ const dbConnection: DataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
-  logging: true,
+  // logging: true,
   entities: [
     User,
     Product,
@@ -32,6 +34,8 @@ const dbConnection: DataSource = new DataSource({
     Cart,
     ProductsCart,
     Orders,
+    Message,
+    Conversation
   ],
 });
 

@@ -4,10 +4,11 @@ import routerProduct from './routes/product.routes.ts';
 import routerRoles from './routes/roles.routes.ts';
 import routerAuth from './routes/auth.routes.ts';
 import routerService from './routes/service.routes.ts';
-import routerSchedule from './routes/schedule.routes.ts';
 import routerProducCart from './routes/productsCart.routes.ts';
 import routerCart from './routes/cart.routes.ts';
 import routerOrder from './routes/orders.routes.ts';
+import routerMessage from './routes/message.routes.ts';
+import routerConversation from './routes/conversations.routes.ts';
 
 const router: Router = Router();
 
@@ -19,5 +20,7 @@ router.use('/roles', routerRoles);
 router.use('/auth', routerAuth);
 router.use('/services', routerService);
 router.use('/orders', routerOrder);
+router.use('/messages', routerMessage);
+router.use('/conversations', routerConversation);
 
 export default router;

@@ -25,11 +25,11 @@ export class ProductsCart {
   @Column()
   quantity: number;
 
-  @ManyToOne(() => Product, product => product.productCart, { eager: true })
+  @ManyToOne(() => Product, product => product.productCart)
   @JoinColumn({ name: 'idProduct' })
   product: Product;
 
-  @ManyToOne(() => Cart, cart => cart.productCart)
+  @ManyToOne(() => Cart, cart => cart.productCart,{eager:true})
   @JoinColumn({ name: 'idCart' })
   cart: CartRelation;
 

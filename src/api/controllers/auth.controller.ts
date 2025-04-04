@@ -7,7 +7,7 @@ export class AuthController {
   public static async createAuth(req: Request, res: Response) {
     const authService: AuthService = container.resolve(AuthService);
     const tokens: ReturnTokens = authService.create(req.body);
-    res.json({ message: 'meloo', ...tokens });
+    res.json({ message: 'meloo', ...tokens,chatId:req.body.chatId ,id:req.body.id});
   }
 
   public static async renovateAcessToken(

@@ -11,12 +11,13 @@ import { dbConnection } from '../../config/db/db.config.ts';
 export class UserService {
   async create(data: any): Promise<User | User[] | any> {
     try {
+      const chatId:string=crypto.randomUUID();
       const hashPassword: string = await crypt.hash(data.password, 10);
       const queryCreate:string=`
-        INSERT INTO users(name,email,password,idRole)
-        VALUES(?,?,?,?)
+        INSERT INTO users(name,email,password,idRole,chatId)
+        VALUES(?,?,?,?,?)
       `;
-      const {insertId}:any=await dbConnection.query(queryCreate,[data.name,data.email,hashPassword,data.idRole]);
+      const {insertId}:any=await dbConnection.query(queryCreate,[data.name,data.email,hashPassword,data.idRole,chatId]);
 
       const queryGetUser:string=`
         SELECT * FROM users WHERE id=?
@@ -36,6 +37,14 @@ export class UserService {
         });
       }
     }
+  }
+
+  async getUserByChatId (chatId:string){
+    const query:string=`
+    SELECT * FROM users WHERE chatId=?
+    `;
+    const data:User[]=await dbConnection.query(query,[chatId]);
+    return data[0];
   }
 
   async findAllUsers(): Promise<Result<User[]>> {

@@ -25,11 +25,13 @@ export const ValidateDtoAuth = (
   if (
     !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(authTokens.email)
   ) {
+    
     ReponseHttp.BAD_REQUEST(res, 'THE EMAIL IS NOT VALID', req.method);
     return;
   }
-
+  
   if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/.test(authTokens.password)) {
+    console.log('THIS BAD PASSWORD');
     ReponseHttp.BAD_REQUEST(res, 'THE PASSWORD IS NOT VALID', req.method);
     return;
   }

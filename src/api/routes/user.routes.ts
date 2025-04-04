@@ -95,8 +95,8 @@ routes.post(
  *                  userError:
  *                      $ref: '#/components/examples/ExampleError500'
  */
-routes.get('/', VerifyToken.validateToken, UserController.allUsers);
-
+routes.get('/', UserController.allUsers);
+//VerifyToken.validateToken,
 /**
  * @swagger
  * /api/users/:idUser:

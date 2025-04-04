@@ -12,9 +12,12 @@ export class RolesService {
     try {
       const roleRepo: Role = RoleRepository.create(data);
       await RoleRepository.save(roleRepo);
-      const query=`
-        INSERT INTO 
-      `;
+
+
+      
+      // const query=`
+      //   INSERT INTO 
+      // `;
       return roleRepo;
     } catch (err: any) {
       if (err.errno == 1452) {
